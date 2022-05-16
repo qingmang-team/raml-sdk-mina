@@ -44,11 +44,11 @@
     <block wx:elif="{{paragraph.type == 2}}" style="position:relative"
       data-source="{{paragraph.media.source}}" data-cover="{{paragraph.media.cover}}" catchtap="playVideo">
       <!-- 在小程序中，内嵌的视频播放会出现不少 bug，最好是点击后外部播放 -->
-      <!-- <video src="{{paragraph.media.source}}" class="paragraph__media"></video> -->
-      <view style="position:absolute;width:100%;height:100%;background-color:rgba(0, 0, 0, 0.25);"/>
+      <video src="{{paragraph.media.source}}" poster="{{paragraph.media.cover}}" class="paragraph__video" style="width:100%;"></video>
+      <!-- <view style="position:absolute;width:100%;height:100%;background-color:rgba(0, 0, 0, 0.25);"/>
       <image src="{{paragraph.media.cover}}" class="paragraph__video" mode="aspectFill"/>
       <image src="/images/play.svg"
-        style="width:18px; height:18px; top:0; left:0; bottom:0; right:0; margin:auto; position: absolute; z-index=1;" />
+        style="width:18px; height:18px; top:0; left:0; bottom:0; right:0; margin:auto; position: absolute; z-index=1;" /> -->
     </block>
     <!-- 音频 -->
     <block wx:elif="{{paragraph.type == 3}}">
