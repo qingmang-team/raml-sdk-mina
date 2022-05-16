@@ -9,25 +9,31 @@ Page({
     var id = options.id;
     if (id === undefined) {
       // 默认测试使用的 doc id
-      id = '7217265657588929268';
+      id = '-2132495101603821140';
     }
+    console.log('load article started, ', id);
     // 请求文章数据
     var that = this;
     var payloads = {
-      id: id,
-      token: '92f136746dd34370a71363f6b66a3e01', // 测试 token 请替换
-      format: 'raml'
+      doc_id: id,
+      // token: '92f136746dd34370a71363f6b66a3e01', // 测试 token 请替换
+      template: 'raml'
     }
     wx.request({
-      url: 'https://api.qingmang.me/v2/article.get',
+      url: 'https://api.qingmang.mobi/v2/pool.article.fetchEvent',
       data: payloads,
+      fail: function (res) {
+        console.log("load article fail, ", res);
+      },
       success: function (res) {
-        console.log("load article", res);
-        var article = res.data.article;
-        article.date = util.formatTime(article.publishTimestamp)
+        console.log("load article success, ", res);
+        let event = res.data.events[0];
+        let listInfo = event.listsInfo[0];
+        var article = event.article;
+        article.date = util.formatTime(article.publishDate)
 
         // 重新调整部分参数，更适合小程序展示
-        var articleContent = JSON.parse(article.content);
+        var articleContent = JSON.parse(article.contentHtml);
         for (let paragraph of articleContent) {
           switch (paragraph.type) {
             case 0:
@@ -104,6 +110,13 @@ Page({
                 }
               }
               break;
+            case 2: // video
+              {
+                if (paragraph.media && paragraph.media.source) {
+                  paragraph.media.source = paragraph.media.source.replace("qingmang.me", "qingmang.mobi");
+                  console.log("replace video url ", paragraph.media.source);
+                }
+              }
             case 3: // audio
               {
                 if (paragraph.media && paragraph.media.title) {
@@ -118,8 +131,8 @@ Page({
             title: article.title,
             author: article.author,
             provider: {
-              title: article.providerName,
-              icon: article.providerIcon,
+              title: listInfo.name,
+              icon: listInfo.icon,
             },
             date: article.date
           },
