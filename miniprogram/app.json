@@ -7,5 +7,6 @@
       "version": "dev",
       "provider": "wx05790b1180642960"
     }
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

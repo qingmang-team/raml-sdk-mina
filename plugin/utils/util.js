@@ -1,7 +1,7 @@
 /**
  * 把一个时间戳（毫秒数），转成中文字符串
  */
-function formatTime(timestamp, relativeTimestamp = true) {
+ export function formatTime(timestamp, relativeTimestamp = true) {
   var currentDate = new Date();
   var current = currentDate.getTime();
   var diff = current - timestamp;
@@ -36,11 +36,23 @@ function formatTime(timestamp, relativeTimestamp = true) {
   return "" + year + "年" + month + "月" + day + "日";
 }
 
-function decodeParam(param) {
+export function decodeParam(param) {
   return decodeURIComponent(param).replace("@html", ".html");
 }
 
-module.exports = {
-  formatTime: formatTime,
-  decodeParam: decodeParam,
+export const loadFont = async (fontFamily, filename = null) => {
+  if (!fontFamily) {
+    return
+  }
+  if (!filename) filename = `${fontFamily}.otf`
+  try {
+    await wx.loadFontFace({
+      global: true,
+      family: fontFamily,
+      source: `url('https://ssupload.qingmang.mobi/${filename}?attname=${filename}')`,
+    })
+    console.log(`font ${fontFamily} loaded success`)
+  } catch (error) {
+    console.warn(`font ${fontFamily} loaded failed`, error)
+  }
 }
