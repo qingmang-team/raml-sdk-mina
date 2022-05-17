@@ -1,12 +1,14 @@
 <!-- 文章标题 -->
-<view class="article__title">{{article.title}}</view>
+<view class="article__header">
+  <view class="article__title">{{article.title}}</view>
 
-<!-- 其它信息 -->
-<view class="article__meta">
-  <view wx:if="{{article.provider}}" class="article__provider">
-    <image src="{{article.provider.icon}}" class="article-provider__icon" mode="aspectFill" />
-    <text wx:if="{{article.author}}" class="article-provider__name">{{article.provider.title}} · {{article.author}} · {{article.date}}</text>
-    <text wx:else class="article-provider__name">{{article.provider.title}} · {{article.date}}</text>
+  <!-- 其它信息 -->
+  <view class="article__meta">
+    <view wx:if="{{article.provider}}" class="article__provider">
+      <image src="{{article.provider.icon}}" class="article-provider__icon" mode="aspectFill" />
+      <text wx:if="{{article.author}}" class="article-provider__name">{{article.provider.title}} · {{article.author}} · {{article.date}}</text>
+      <text wx:else class="article-provider__name">{{article.provider.title}} · {{article.date}}</text>
+    </view>
   </view>
 </view>
 
@@ -15,15 +17,21 @@
   <!-- 正文，按段落来渲染 -->
   <block wx:for="{{content}}" wx:for-item="paragraph">
     <!-- 文本 -->
-    <block wx:if="{{paragraph.type == 0}}">
-      <view class="{{paragraph.text.class}}">
+    <view wx:if="{{paragraph.type == 0}}" class="{{paragraph.text.class}}">
+      <view wx:if="{{paragraph.li && paragraph.li.level > 0}}" style="display:inline;margin-right:10rpx;margin-left:{{(paragraph.li.level - 1) * 20}}rpx;">
+        <text wx:if="{{paragraph.li.type === 'ol'}}">•</text>
+        <text wx:elif="{{paragraph.li.type === 'ol' && paragraph.li.level > 1}}">◦</text>
+        <text wx:elif="{{paragraph.li.type === 'ul'}}">{{paragraph.li.order}}</text>
+      </view>
+      <view style="display:inline;">
         <block wx:for="{{paragraph.text.sentences}}" wx:for-item="sentence">
-          <text wx:if="{{sentence.tag == 'strong'}}" class="sentence__bold">{{sentence.text}}</text>
-          <text wx:elif="{{sentence.tag == 'a'}}" class="sentence__link" data-link="{{sentence.source}}" bindtap="openLink">{{sentence.text}}</text>
-          <text wx:else>{{sentence.text}}</text>
+          <block wx:for="{{sentence.sentences}}" wx:for-item="word">
+            <text wx:if="{{word.tag == 'a'}}" class="{{word.class}}" data-link="{{word.source}}" bindtap="openLink">{{word.text}}</text>
+            <text class="{{word.class}}" wx:else>{{word.text}}</text>
+          </block>
         </block>
       </view>
-    </block>
+    </view>
     <!-- 图片 -->
     <block wx:elif="{{paragraph.type == 1}}">
       <!-- 根据图片尺寸来做渲染 -->
@@ -36,7 +44,7 @@
           style="width: 100vw" mode="widthFix" />
       </view>
       <!-- 如果图片有标题，展示 -->
-      <view wx:if="{{paragraph.image.title != undefined}}" class="image__title">
+      <view wx:if="{{paragraph.image.title != undefined}}" class="paragraph__image-caption">
         {{paragraph.image.title}}
       </view>
     </block>
