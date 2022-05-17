@@ -1,3 +1,22 @@
+<template name="note-attachmenets">
+  <view class="attachmenets">
+    <!-- header -->
+    <view class="attachmenets__header">
+      <image wx:for="{{highlight.users}}" wx:for-item="user" wx:key="uid" 
+        class="attachmenets__avatar" src="{{user.avatar}}" />
+      <text class="attachmenets__meta">{{highlight.number > 1 ? (highlight.number + ' 人') : ''}}马克了</text>
+    </view>
+    <!-- notes -->
+    <block wx:if="{{highlight.annotationList && highlight.annotationList.length > 0}}">
+      <block wx:for="{{highlight.annotationList}}" wx:for-item="note" wx:key="id">
+        <view wx:if="{{note.annotation.text}}" class="attachmenets__annotation__text">
+          <text style="font-weight: 600">{{note.user.name}} · </text><text>{{ note.annotation.text}}</text>
+        </view>
+      </block>
+    </block>
+  </view>
+</template>
+
 <!-- 文章标题 -->
 <view class="article__header">
   <view class="article__title">{{article.title}}</view>
@@ -15,33 +34,39 @@
 <!-- 文章详情 -->
 <view class="article">
   <!-- 正文，按段落来渲染 -->
-  <block wx:for="{{content}}" wx:for-item="paragraph">
+  <block wx:for="{{content}}" wx:for-item="paragraph" wx:key="id">
     <!-- 文本 -->
     <view wx:if="{{paragraph.type == 0}}" class="{{paragraph.text.class}}">
-      <view wx:if="{{paragraph.li && paragraph.li.level > 0}}" style="display:inline;margin-right:10rpx;margin-left:{{(paragraph.li.level - 1) * 20}}rpx;">
-        <text wx:if="{{paragraph.li.type === 'ol'}}">•</text>
-        <text wx:elif="{{paragraph.li.type === 'ol' && paragraph.li.level > 1}}">◦</text>
-        <text wx:elif="{{paragraph.li.type === 'ul'}}">{{paragraph.li.order}}</text>
-      </view>
-      <view style="display:inline;">
-        <block wx:for="{{paragraph.text.sentences}}" wx:for-item="sentence">
-          <block wx:for="{{sentence.sentences}}" wx:for-item="word">
-            <text wx:if="{{word.tag == 'a'}}" class="{{word.class}}" data-link="{{word.source}}" bindtap="openLink">{{word.text}}</text>
-            <text class="{{word.class}}" wx:else>{{word.text}}</text>
+      <view style="display: flex;">
+        <view wx:if="{{paragraph.li && paragraph.li.level > 0}}" style="display:inline;margin-right:10rpx;margin-left:{{(paragraph.li.level - 1) * 20}}rpx;">
+          <text wx:if="{{paragraph.li.type === 'ol'}}">•</text>
+          <text wx:elif="{{paragraph.li.type === 'ol' && paragraph.li.level > 1}}">◦</text>
+          <text wx:elif="{{paragraph.li.type === 'ul'}}">{{paragraph.li.order}}</text>
+        </view>
+        <view style="display:inline;">
+          <block wx:for="{{paragraph.text.sentences}}" wx:for-item="sentence">
+            <block wx:for="{{sentence.sentences}}" wx:for-item="word">
+              <text class="{{word.class}} {{word.highlight ? 'sentence__highlight' : ''}}" 
+                data-word="{{word}}"
+                bindtap="openLink">{{word.text}}</text>
+            </block>
           </block>
-        </block>
+        </view>
       </view>
+      <template is="note-attachmenets" wx:if="{{paragraph.highlight}}" data="{{highlight: paragraph.highlight}}"></template>
     </view>
     <!-- 图片 -->
     <block wx:elif="{{paragraph.type == 1}}">
       <!-- 根据图片尺寸来做渲染 -->
       <view class="paragraph__image">
-        <image wx:if="{{paragraph.image.width >= 750}}" src="{{paragraph.image.source}}"
-          mode="aspectFill" style="width: 100vw; height: {{paragraph.image.height}}rpx;"/>
-        <image wx:elif="{{paragraph.image.width > 0}}" src="{{paragraph.image.source}}"
-          mode="aspectFill" style="width: {{paragraph.image.width}}rpx; height: {{paragraph.image.height}}rpx; margin-left: {{(750 - paragraph.image.width) / 2}}rpx" />
+        <block wx:if="{{paragraph.image.width > 0}}">
+          <image wx:if="{{paragraph.decoration}}" src="{{paragraph.image.source}}"
+            mode="aspectFill" style="width: {{paragraph.image.width}}rpx; height: {{paragraph.image.height}}rpx; margin-left: {{(670 - paragraph.image.width) / 2}}rpx" />
+          <image wx:else src="{{paragraph.image.source}}"
+            mode="aspectFill" style="width: 670rpx; height: {{paragraph.image.height}}rpx;"/>
+        </block>
         <image wx:else src="{{paragraph.image.source}}"
-          style="width: 100vw" mode="widthFix" />
+          style="width: 100%" mode="widthFix" />
       </view>
       <!-- 如果图片有标题，展示 -->
       <view wx:if="{{paragraph.image.title != undefined}}" class="paragraph__image-caption">

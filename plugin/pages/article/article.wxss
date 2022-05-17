@@ -29,6 +29,11 @@ page {
   --body1-font-family: serif;
   --body1-font-weight: 400;
   
+  --body2-font-size: 30rpx;
+  --body2-line-height: 40rpx;
+  --body2-font-family: serif;
+  --body2-font-weight: 400;
+
   --quote1-font-size: 40rpx;
   --quote1-line-height: 50rpx;
   --quote1-font-family: 'quote-font', serif;
@@ -41,6 +46,7 @@ page {
 
   --gray100: #000;
   --gray40: rgba(0, 0, 0, 0.4);
+  --gray7: rgba(0, 0, 0, 0.08);
 }
 
 .article__header {
@@ -97,6 +103,7 @@ page {
 }
 
 .paragraph__text,
+.paragraph__image,
 .paragraph__title,
 .paragraph__blockquote,
 .paragraph__list,
@@ -136,7 +143,6 @@ page {
   line-height: var(--subtitle2-line-height);
 }
 
-.paragraph__image,
 .paragraph__video,
 .paragraph__highlight {
   margin-left: 0;
@@ -163,11 +169,6 @@ page {
   font-weight: var(--quote1-font-weight);
   line-height: var(--quote1-line-height);
 }
-.paragraph__list {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-}
 
 .style_aside {
   text-align: center;
@@ -182,7 +183,58 @@ page {
   /*border-bottom: #000 dashed 1px;*/
   text-decoration: underline;
 }
+.sentence__highlight {
+  background-color: var(--gray7)
+}
 
 audio {
   max-width: 600rpx;
+}
+
+.attachmenets {
+  width: 750rpx;
+  margin-left: -40rpx;
+
+  margin-bottom: var(--subgrid);
+}
+.attachmenets__header {
+  height: 80rpx;
+  padding-left: var(--margin);
+  padding-right: var(--margin);
+
+  display: flex;
+  align-items: center;
+}
+.attachmenets__avatar {
+  height: 48rpx;
+  width: 48rpx;
+  border-radius: 24rpx;
+
+  margin-left: -10rpx;
+}
+.attachmenets__avatar:first-child {
+  margin-left: 0;
+}
+.attachmenets__meta {
+  margin-left: var(--subgrid);
+
+  font-size: var(--caption1-font-size);
+  font-family: var(--caption1-font-family);
+  font-weight: var(--caption1-font-weight);
+  line-height: var(--caption1-line-height);
+  color: var(--gray40);
+}
+.attachmenets__annotation__text {
+  padding-left: var(--margin);
+  padding-right: var(--margin);
+  padding-top: var(--grid);
+  padding-bottom: var(--grid);
+
+  font-size: var(--body2-font-size);
+  font-family: var(--body2-font-family);
+  font-weight: var(--body2-font-weight);
+  line-height: var(--body2-line-height);
+  color: var(--gray100);
+
+  background-color: var(--gray7);
 }
