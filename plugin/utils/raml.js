@@ -353,8 +353,9 @@ const buildParagraph = (paragraph) => {
       var image = paragraph.image
       image.thumb_source = genThumbUrl(image.source)
       if (image.width > 0) {
-        const fullWidth = 750 // 按照微信的设计，屏幕宽度保持为 750rpx
-        if (image.width * 4 < fullWidth) {
+        const margin = 40
+        const fullWidth = 750 - 2 * margin // 按照微信的设计，屏幕宽度保持为 750rpx - 2 * margin
+        if (image.decoration) {
           image.height = image.height * 2
           image.width = image.width * 2
         } else {
@@ -391,7 +392,7 @@ export const attachAllHighlights = function(paragraphs, highlights) {
       let annotationList = []
       for (let paragraphHighlight of paragraphHighlights) {
         for (let note of paragraphHighlight.notes) {
-          number += note.similarCount
+          number += note.count || 0
           if (note.myself) {
             myself = true
           }
@@ -399,7 +400,7 @@ export const attachAllHighlights = function(paragraphs, highlights) {
           if (!myself && !note.user.avatar) {
             continue
           }
-          let lastId = note.content[note.content.length - 1].id
+          let lastId = note.marks[note.marks.length - 1].id
           if (lastId !== paragraph.id) {
             // 只在最后一段显示 annotation
             continue
@@ -419,9 +420,9 @@ export const attachAllHighlights = function(paragraphs, highlights) {
           // 计算该段出现的评论信息.
           if (
             note.annotation &&
-            note.annotation.trim().length > 0 &&
-            note.content
+            (note.annotation.text || note.annotation.images.length)
           ) {
+            console.log("annotation", note.annotation)
             annotationList.push(note)
           }
         }
@@ -457,15 +458,15 @@ export const convertNotesToHighlights = function(notes) {
  * 把一个 Note 添加到 highlights 里面去.
  */
 const addNoteToHighlights = function(note, highlights) {
-  if (note.content === undefined) {
+  if (!note.marks) {
     return
   }
-  let myself = note.myself
-  for (let i = 0; i < note.content.length; i++) {
-    const paragraph = note.content[i]
+  let myself = note.myself  // TODO 如何判定 self
+  for (let i = 0; i < note.marks.length; i++) {
+    const paragraph = note.marks[i]
     const id = paragraph.id
     let highlight = highlights[id]
-    if (highlight === undefined) {
+    if (!highlight) {
       highlight = []
       highlights[id] = highlight
     }
@@ -506,6 +507,8 @@ const addNoteToHighlights = function(note, highlights) {
       if (highlight.length === 0) {
         highlight.push({
           tag: 'highlight',
+          start: paragraph.start,
+          end: paragraph.end,
           myself: myself,
           notes: [note],
         })
@@ -519,6 +522,9 @@ const addNoteToHighlights = function(note, highlights) {
           highlight[0].notes.push(note)
         }
       }
+    }
+    if (note.similarNotes && note.similarNotes.length) {
+      highlight[0].notes.push(...note.similarNotes)
     }
   }
 }
