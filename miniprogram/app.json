@@ -5,7 +5,7 @@
   "plugins": {
     "read-plugin": {
       "version": "dev",
-      "provider": "wx05790b1180642960"
+      "provider": "wx13a6db3ed7ec76d1"
     }
   },
   "sitemapLocation": "sitemap.json"
