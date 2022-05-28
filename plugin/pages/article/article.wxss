@@ -1,8 +1,8 @@
 /**
- * Theme
+ * Theme 变量
  **/
 page {
-  --margin: 40rpx;
+  --margin: 48rpx;
   --grid: 20rpx;
   --grid2: 40rpx;
   --grid4: 80rpx;
@@ -24,6 +24,11 @@ page {
   --subtitle2-font-family: serif;
   --subtitle2-font-weight: 600;
   
+  --subtitle4-font-size: 26rpx;
+  --subtitle4-line-height: 40rpx;
+  --subtitle4-font-family: serif;
+  --subtitle4-font-weight: 600;
+
   --body1-font-size: 38rpx;
   --body1-line-height: 70rpx;
   --body1-font-family: serif;
@@ -44,47 +49,102 @@ page {
   --caption1-font-family: serif;
   --caption1-font-weight: 400;
 
+  --secondary-color: #E9D8B8;
   --gray100: #000;
   --gray40: rgba(0, 0, 0, 0.4);
   --gray7: rgba(0, 0, 0, 0.08);
 }
 
-.article__header {
-  padding-top: var(--grid2);
-  padding-left: var(--margin);
-  padding-right: var(--margin);
-  padding-bottom: var(--grid2);
-}
-.article__title {
+/**
+ * Theme Class
+ **/
+.headline {
   font-size: var(--headline-font-size);
   font-family: var(--headline-font-family);
   font-weight: var(--headline-font-weight);
   line-height: var(--headline-line-height);
   color: var(--gray100);
 }
-.article__meta {
+.body1 {
+  font-size: var(--body1-font-size);
+  font-family: var(--body1-font-family);
+  font-weight: var(--body1-font-weight);
+  line-height: var(--body1-line-height);
+  color: var(--gray100);
+}
+.caption1 {
   font-size: var(--caption1-font-size);
   font-family: var(--caption1-font-family);
   font-weight: var(--caption1-font-weight);
   line-height: var(--caption1-line-height);
   color: var(--gray40);
+}
+.subtitle4 {
+  font-size: var(--subtitle4-font-size);
+  font-family: var(--subtitle4-font-family);
+  font-weight: var(--subtitle4-font-weight);
+  line-height: var(--subtitle4-line-height);
+  color: var(--gray100);
+}
+.secondary {
+  color: var(--secondary-color);
+}
 
+/**
+ * 通用组件
+ **/
+.divider {
+  position: relative;
+  height: 1px;
+  width: var(--grid4);
+  background-color: var(--secondary-color);
+  margin-bottom: var(--grid2);
+}
+.avatar__medium {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 40rpx;
+}
+.avatar__small {
+  height: 48rpx;
+  width: 48rpx;
+  border-radius: 24rpx;
+}
+
+/**
+ * Article Classes
+ **/
+.article__header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; 
+  height: 1460rpx;
+  box-sizing: border-box;
+}
+.article__header__bottom {
+  margin-left: var(--margin);
+  margin-right: var(--margin);
+}
+.article__from {
+  height: 60rpx;
+  width: 180rpx;
+}
+.article__headline {
   margin-top: var(--grid);
+}
+.article__intro {
+  margin-top: var(--grid);
+}
+.article__byline {
+  margin-top: var(--grid4);
+  margin-bottom: var(--grid4);
 
   display: flex;
   align-items: center;
-  justify-content: space-between;
 }
 .article__provider {
   display: flex;
-  align-items: center;
-}
-.article-provider__icon {
-  width: var(--caption1-font-size);
-  height: var(--caption1-font-size);
-}
-.article-provider__name {
-  padding-left: var(--subgrid);
+  flex-direction: column;
 }
 
 .article__footer {
@@ -197,33 +257,25 @@ audio {
 
   margin-bottom: var(--subgrid);
 }
-.attachmenets__header {
-  height: 80rpx;
+.avatars {
   padding-left: var(--margin);
   padding-right: var(--margin);
+  padding-top: var(--grid);
+  padding-bottom: var(--grid);
 
   display: flex;
   align-items: center;
 }
-.attachmenets__avatar {
-  height: 48rpx;
-  width: 48rpx;
-  border-radius: 24rpx;
-
+.avatars__icon {
   margin-left: -10rpx;
 }
-.attachmenets__avatar:first-child {
+.avatars__icon:first-child {
   margin-left: 0;
 }
-.attachmenets__meta {
+.avatars__meta {
   margin-left: var(--subgrid);
-
-  font-size: var(--caption1-font-size);
-  font-family: var(--caption1-font-family);
-  font-weight: var(--caption1-font-weight);
-  line-height: var(--caption1-line-height);
-  color: var(--gray40);
 }
+
 .attachmenets__annotation__text {
   padding-left: var(--margin);
   padding-right: var(--margin);
