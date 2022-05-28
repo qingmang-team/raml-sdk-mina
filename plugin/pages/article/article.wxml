@@ -1,11 +1,15 @@
+<template name="avatars">
+  <view class="avatars">
+    <image wx:for="{{users}}" wx:for-item="user" wx:key="uid" 
+      class="avatars__icon avatar__small" src="{{user.avatar}}" />
+    <text class="avatars__meta caption1"><text class="subtitle4">{{name}}</text>{{meta}}</text>
+  </view>
+</template>
 <template name="note-attachmenets">
   <view class="attachmenets">
     <!-- header -->
-    <view class="attachmenets__header">
-      <image wx:for="{{highlight.users}}" wx:for-item="user" wx:key="uid" 
-        class="attachmenets__avatar" src="{{user.avatar}}" />
-      <text class="attachmenets__meta">{{highlight.number > 1 ? (highlight.number + ' 人') : ''}}马克了</text>
-    </view>
+    <template is="avatars" data="{{users: highlight.users, meta: (highlight.number > 1 ? (highlight.number + ' 人') : '') + '马克了' }}"></template>
+
     <!-- notes -->
     <block wx:if="{{highlight.annotationList && highlight.annotationList.length > 0}}">
       <block wx:for="{{highlight.annotationList}}" wx:for-item="note" wx:key="id">
@@ -19,15 +23,24 @@
 
 <!-- 文章标题 -->
 <view class="article__header">
-  <view class="article__title">{{article.title}}</view>
+  <view class="article__header__top">
+    <template wx:if="{{article.markers}}" is="avatars" data="{{users: article.markers, name: article.markers[0].name, meta: ' 等在阅览室马克'}}"></template>
+  </view>
 
-  <!-- 其它信息 -->
-  <view class="article__meta">
-    <view wx:if="{{article.provider}}" class="article__provider">
-      <image src="{{article.provider.icon}}" class="article-provider__icon" mode="aspectFill" />
-      <text wx:if="{{article.author}}" class="article-provider__name">{{article.provider.title}} · {{article.author}} · {{article.date}}</text>
-      <text wx:else class="article-provider__name">{{article.provider.title}} · {{article.date}}</text>
+  <view class="article__header__bottom">
+    <image wx:if="{{article.from}}" class="article__from" mode="heightFix" src="{{article.from.icon}}" />
+    <view wx:if="{{article.title}}" class="article__headline headline">{{article.title}}</view>
+    <view wx:if="{{article.intro}}" class="article__intro body1">{{article.intro}}</view>
+
+    <!-- 其它信息 -->
+    <view class="article__byline">
+      <image wx:if="{{article.author}}" class="avatar__medium" style="margin-right: 10rpx;" mode="aspectFill" src="{{article.author.avatar}}" />
+      <view class="article__provider">
+        <view wx:if="{{article.author}}" class="subtitle4 secondary">{{article.author.names}}</view>
+        <view><text class="subtitle4">{{article.provider.title}}</text><text class="caption1"> · {{article.date}}</text></view>
+      </view>
     </view>
+    <view class="divider" />
   </view>
 </view>
 

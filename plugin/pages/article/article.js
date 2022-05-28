@@ -1,7 +1,7 @@
 import { loadFont, formatTime, decodeParam } from '../../utils/util.js';
 import { parseRAML, convertNotesToHighlights, attachAllHighlights } from '../../utils/raml.js';
 
-const apiDomain = 'https://api.qingmang.mobi'
+const apiDomain = 'https://api.readland.cn'
 
 Page({
   /**
@@ -75,12 +75,32 @@ Page({
           article: {
             id: that.id,
             title: article.title,
-            author: article.author,
+            intro: article.snippet,
+            author: {
+              names: '书韵',
+              avatar: 'http://statics04.qingmang.mobi/456a83aec821.jpg'
+            },
+            from: {
+              icon: "http://statics04.qingmang.mobi/0fb54c6ede68.jpg"
+            },
             provider: {
               title: listInfo.name,
               icon: listInfo.icon,
             },
-            date: articleDate
+            date: articleDate,
+            markers: [{
+              uid: 2651,
+              avatar: 'http://statics04.qingmang.mobi/15501c8ed2c0.jpg',
+              name: 'Pennyfu'
+            }, {
+              uid: 2006,
+              avatar: 'http://statics04.qingmang.mobi/456a83aec821.jpg',
+              name: '书韵'
+            }, {
+              uid: 1730,
+              avatar: 'http://statics04.qingmang.mobi/8ec0618ac0a2.jpg',
+              name: '宽治'
+            }]
           },
         });
         that.updateContent();
