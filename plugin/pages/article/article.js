@@ -102,6 +102,7 @@ Page({
               name: '宽治'
             }]
           },
+          'theme.style': '--secondary-color:#E9D8B8;'
         });
         that.updateContent();
       }

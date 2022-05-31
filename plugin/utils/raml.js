@@ -115,11 +115,11 @@ const buildTextDomTree = function(paragraph, sentences, words) {
     class: null,
   }
   if (paragraph.blockquote === 1) {
-    view.class = 'paragraph__blockquote'
+    view.class = 'paragraph__blockquote quote1'
   } else if (text.linetype === 'aside') {
-    view.class = 'paragraph__aside'
+    view.class = 'paragraph__aside body1'
   } else {
-    view.class = 'paragraph__text'
+    view.class = 'paragraph__text body1'
   }
 
   // 计算每个句子
@@ -295,26 +295,26 @@ const buildParagraph = (paragraph) => {
       const text = paragraph.text
       // blockquote 的样式
       if (paragraph.blockquote === 1) {
-        text.class = 'paragraph__blockquote'
+        text.class = 'paragraph__blockquote quote1'
       } else {
         switch (text.linetype) {
           case 'aside':
             text.class = 'paragraph__text style_aside'
             break
           case 'h1':
-            text.class = 'paragraph__title style_h1'
+            text.class = 'paragraph__title subtitle1'
             break
           case 'h2':
-            text.class = 'paragraph__title style_h2'
+            text.class = 'paragraph__title subtitle2'
             break
           case 'h3':
-            text.class = 'paragraph__title style_h3'
+            text.class = 'paragraph__title subtitle3'
             break
           case 'pre':
             text.class = 'paragraph__text style_pre'
             break
           default:
-            text.class = 'paragraph__text'
+            text.class = 'paragraph__text body1'
             break
         }
       }
@@ -322,20 +322,20 @@ const buildParagraph = (paragraph) => {
         const dict = {
           ul() {
             if (paragraph.li.level < 3) {
-              text.class = `paragraph__list style_ul`
+              text.class = `paragraph__list body1 style_ul`
             } else {
-              text.class = 'paragraph__list style_ul'
+              text.class = 'paragraph__list body1 style_ul'
             }
           },
           ol() {
-            text.class = `paragraph__list style_ol`
+            text.class = `paragraph__list body1 style_ol`
             const ORDER_LIST = ' abcdefghijklmnopqrstuvwxyz'
             if (paragraph.li.level === 1) {
               paragraph.li.displayOrder = paragraph.li.order
             } else if (paragraph.li.level === 2) {
               paragraph.li.displayOrder = ORDER_LIST[paragraph.li.order]
             } else {
-              text.class = 'paragraph__list style_ol'
+              text.class = 'paragraph__list body1 style_ol'
             }
           },
         }
@@ -353,7 +353,7 @@ const buildParagraph = (paragraph) => {
       var image = paragraph.image
       image.thumb_source = genThumbUrl(image.source)
       if (image.width > 0) {
-        const margin = 40
+        const margin = 48
         const fullWidth = 750 - 2 * margin // 按照微信的设计，屏幕宽度保持为 750rpx - 2 * margin
         if (image.decoration) {
           image.height = image.height * 2
