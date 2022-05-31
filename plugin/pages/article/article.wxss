@@ -13,42 +13,42 @@ page {
 
   --headline-font-size: 56rpx;
   --headline-line-height: 70rpx;
-  --headline-font-family: serif;
+  --headline-font-family: 'PingFang SC';
   --headline-font-weight: 500;
   
-  --subtitle1-font-size: 44rpx;
-  --subtitle1-line-height: 70rpx;
-  --subtitle1-font-family: serif;
+  --subtitle1-font-size: 40rpx;
+  --subtitle1-line-height: 60rpx;
+  --subtitle1-font-family: 'PingFang SC', 'SF Pro';
   --subtitle1-font-weight: 500;
 
-  --subtitle2-font-size: 38rpx;
-  --subtitle2-line-height: 70rpx;
-  --subtitle2-font-family: serif;
-  --subtitle2-font-weight: 600;
+  --subtitle2-font-size: 34rpx;
+  --subtitle2-line-height: 50rpx;
+  --subtitle2-font-family: 'PingFang SC', 'SF Pro';
+  --subtitle2-font-weight: 500;
   
-  --subtitle4-font-size: 26rpx;
+  --subtitle4-font-size: 28rpx;
   --subtitle4-line-height: 40rpx;
-  --subtitle4-font-family: serif;
-  --subtitle4-font-weight: 600;
+  --subtitle4-font-family: 'PingFang SC', 'SF Pro';
+  --subtitle4-font-weight: 510;
 
-  --body1-font-size: 38rpx;
-  --body1-line-height: 70rpx;
-  --body1-font-family: serif;
+  --body1-font-size: 34rpx;
+  --body1-line-height: 60rpx;
+  --body1-font-family: 'PingFang SC', 'SF Pro';
   --body1-font-weight: 400;
   
   --body2-font-size: 30rpx;
   --body2-line-height: 40rpx;
-  --body2-font-family: serif;
+  --body2-font-family: 'PingFang SC', 'SF Pro';
   --body2-font-weight: 400;
 
   --quote1-font-size: 40rpx;
   --quote1-line-height: 50rpx;
-  --quote1-font-family: 'quote-font', serif;
+  --quote1-font-family: 'quote-font';
   --quote1-font-weight: 300;
   
-  --caption1-font-size: 26rpx;
+  --caption1-font-size: 28rpx;
   --caption1-line-height: 40rpx;
-  --caption1-font-family: serif;
+  --caption1-font-family: 'PingFang SC', 'SF Pro';
   --caption1-font-weight: 400;
 
   --secondary-color: #E9D8B8;
@@ -67,6 +67,13 @@ page {
   line-height: var(--headline-line-height);
   color: var(--gray100);
 }
+.headline-read {
+  font-size: var(--headline-font-size);
+  font-family: 'quote-font';
+  font-weight: 200;
+  line-height: var(--headline-line-height);
+  color: var(--gray100);
+}
 .quote1 {
   font-size: var(--quote1-font-size);
   font-family: var(--quote1-font-family);
@@ -78,6 +85,13 @@ page {
   font-size: var(--body1-font-size);
   font-family: var(--body1-font-family);
   font-weight: var(--body1-font-weight);
+  line-height: var(--body1-line-height);
+  color: var(--gray100);
+}
+.body1-read {
+  font-size: var(--body1-font-size);
+  font-family: 'quote-font';
+  font-weight: 300;
   line-height: var(--body1-line-height);
   color: var(--gray100);
 }
