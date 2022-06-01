@@ -2,6 +2,7 @@ import { loadFont, formatTime, decodeParam } from '../../utils/util.js';
 import { parseRAML, convertNotesToHighlights, attachAllHighlights } from '../../utils/raml.js';
 
 const apiDomain = 'https://api.readland.cn'
+const weekDays = ['一', '二', '三', '四', '五', '六', '日']
 
 Page({
   /**
@@ -17,6 +18,7 @@ Page({
     
     this.fetchArticle()
     this.fetchNotes()
+    this.fetchRelativeArticles()
   },
   /**
    * 跳转链接
@@ -88,6 +90,9 @@ Page({
               icon: listInfo.icon,
             },
             date: articleDate,
+            textLength: article.textLength,
+            readCount: that.event.readCount,
+            readMinutes: Math.round(that.event.allUserReadSeconds / 60),
             markers: [{
               uid: 2651,
               avatar: 'http://statics04.qingmang.mobi/15501c8ed2c0.jpg',
@@ -135,6 +140,42 @@ Page({
       }
     })
   },
+  fetchRelativeArticles: function() {
+    var that = this;
+    var payloads = {
+      token: 'MzE0ZmUxZGUtYzUwYi0xMWVjLWIyODMtMDAxNjNlMTBiYjdh',
+      max: 1,
+    }
+    wx.request({
+      url: `${apiDomain}/v2/daily.event.list`,
+      data: payloads,
+      fail: function (res) {
+        console.log("load relative articles fail, ", res);
+      },
+      success: function (res) {
+        console.log("load relative articles success, ", res);
+
+        let events = res.data.events[0].section.events
+        if (events && events.length > 0) {
+          const articles = events.map(event => {
+            return {
+              id: event.article.docIdString,
+              title: event.article.title,
+              provider: event.listsInfo[event.listsInfo.length - 1].name,
+              weekDay: weekDays[new Date(event.article.docDate).getDay()]
+            }
+          })
+          console.log("relative articles, ", articles);
+          that.setData({
+            relativeArticles: {
+              title: '更多来自 HALO 每日星球读本',
+              articles: articles
+            }
+          })
+        }
+      }
+    })
+  },
   updateContent: function() {
     if (!this.event || !this.event.article || !this.event.article.contentHtml) {
       return
@@ -147,4 +188,7 @@ Page({
       content: content
     })
   },
+  onHack: function(event) {
+    console.log('card click', event)
+  }
 })

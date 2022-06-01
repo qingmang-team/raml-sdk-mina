@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="3164 502 16 16">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <g id="icon_check_16px" transform="translate(3108 -124)" fill="rgba(255, 255, 255, 0.72)">
+    <path id="Path_883" data-name="Path 883" class="cls-1" d="M0,0H16V16H0Z" transform="translate(56 626)"/>
+    <path id="Path_884" data-name="Path 884" d="M7.137,12.643l-2.78-2.78-.947.94L7.137,14.53l8-8-.94-.94Z" transform="translate(54.863 624.137)"/>
+  </g>
+</svg>

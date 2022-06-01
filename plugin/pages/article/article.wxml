@@ -45,7 +45,7 @@
 </view>
 
 <!-- 文章详情 -->
-<view class="article">
+<view class="article" style="{{theme.style}}">
   <!-- 正文，按段落来渲染 -->
   <block wx:for="{{content}}" wx:for-item="paragraph" wx:key="id">
     <!-- 文本 -->
@@ -113,4 +113,26 @@
     <block wx:elif="{{paragraph.type == 11}}">
     </block>
   </block>
+</view>
+
+<view class="article__footer" wx:if="{{article}}" style="{{theme.style}}">
+  <view class="article__footer__background" />
+
+  <view class="article-achievement__icon">
+    <!-- <image class="article-achievement__icon" src="http://statics04.qingmang.mobi/521afecea49e.jpg" /> -->
+    <image src="/images/check.svg" lazy-load="{{true}}" />
+  </view>
+  <view class="article-achievement__meta caption1">共 {{article.textLength}} 字，你读了 {{readMinutes}} 分钟</view>
+  <view class="article-achievement__meta caption1">共有 {{article.readCount}} 人读过 · 共阅读 {{article.readMinutes}} 分钟</view>
+  <button class="article-achievement__action button1" open-type="share"><image src="/images/check.svg"/>分享</button>
+
+  <view wx:if="{{relativeArticles}}" class="article-relative section">
+    <view class="section-header subtitle1">{{relativeArticles.title}}</view>
+    <navigator wx:for="{{relativeArticles.articles}}" wx:for-item="article" wx:key="id" 
+      class="article__compact card" hover-class="card__hover" url="plugin-private://wx13a6db3ed7ec76d1/pages/article/article?id={{article.id}}" bind:tap="onHack">
+      <view class="article__compact__icon button1">{{article.weekDay}}</view>
+      <view class="article__compact__headline subtitle2">{{article.title}}</view>
+      <view class="article__compact__provider subtitle4">{{article.provider}}</view>
+    </navigator>
+  </view>
 </view>
