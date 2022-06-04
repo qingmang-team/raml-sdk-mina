@@ -323,6 +323,25 @@ page {
   margin-top: var(--grid2);
 }
 
+.paragraph__quote {
+  padding-top: var(--grid4);
+  padding-bottom: var(--grid4);
+  padding-left: var(--margin);
+  padding-right: var(--margin);
+  background-color: var(--gray7);
+  margin-top: var(--grid2);
+}
+.paragraph__quote__icon {
+  position: absolute;
+  left: var(--margin-negative);
+  width: 120rpx;
+  height: 120rpx;
+  top: -130rpx;
+  /* background-color: var(--secondary-color); */
+  /* background-image: url("/images/quote.svg"); */
+  /* -webkit-mask-image: "/images/quote.svg"; */
+}
+
 .paragraph__title:first-child,
 .paragraph__text:first-child,
 .paragraph__image:first-child,

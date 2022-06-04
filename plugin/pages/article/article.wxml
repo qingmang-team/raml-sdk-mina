@@ -50,7 +50,8 @@
   <block wx:for="{{content}}" wx:for-item="paragraph" wx:key="id">
     <!-- 文本 -->
     <view wx:if="{{paragraph.type == 0}}" class="{{paragraph.text.class}}">
-      <view style="display: flex;">
+      <view style="display: flex; position: relative;">
+        <image wx:if="{{paragraph.blockquote === 1}}" class="paragraph__quote__icon" src="/images/quote.svg" />
         <view wx:if="{{paragraph.li && paragraph.li.level > 0}}" style="display:inline;margin-right:10rpx;margin-left:{{(paragraph.li.level - 1) * 20}}rpx;">
           <text wx:if="{{paragraph.li.type === 'ol'}}">•</text>
           <text wx:elif="{{paragraph.li.type === 'ol' && paragraph.li.level > 1}}">◦</text>
