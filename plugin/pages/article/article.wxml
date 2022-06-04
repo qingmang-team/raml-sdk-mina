@@ -47,7 +47,7 @@
 <!-- 文章详情 -->
 <view class="article" style="{{theme.style}}">
   <!-- 正文，按段落来渲染 -->
-  <block wx:for="{{content}}" wx:for-item="paragraph" wx:key="id">
+  <block wx:for="{{content}}" wx:for-item="paragraph" wx:key="id" wx:for-index="index">
     <!-- 文本 -->
     <view wx:if="{{paragraph.type == 0}}" class="{{paragraph.text.class}}">
       <view style="display: flex; position: relative;">
@@ -57,7 +57,7 @@
           <text wx:elif="{{paragraph.li.type === 'ol' && paragraph.li.level > 1}}">◦</text>
           <text wx:elif="{{paragraph.li.type === 'ul'}}">{{paragraph.li.order}}</text>
         </view>
-        <view style="display:inline;">
+        <view style="display:inline-flex;">
           <block wx:for="{{paragraph.text.sentences}}" wx:for-item="sentence">
             <block wx:for="{{sentence.sentences}}" wx:for-item="word">
               <text class="{{word.class}} {{word.highlight ? 'sentence__highlight' : ''}}" 
@@ -65,6 +65,7 @@
                 bindtap="openLink">{{word.text}}</text>
             </block>
           </block>
+          <view wx:if="{{index === content.length - 1}}" class="article-end"><view class="article-end__icon" /></view>
         </view>
       </view>
       <template is="note-attachmenets" wx:if="{{paragraph.highlight}}" data="{{highlight: paragraph.highlight}}"></template>
