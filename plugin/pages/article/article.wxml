@@ -57,7 +57,7 @@
           <text wx:elif="{{paragraph.li.type === 'ol' && paragraph.li.level > 1}}">◦</text>
           <text wx:elif="{{paragraph.li.type === 'ul'}}">{{paragraph.li.order}}</text>
         </view>
-        <view style="display:inline-flex;">
+        <view style="display:inline; z-index: 1">
           <block wx:for="{{paragraph.text.sentences}}" wx:for-item="sentence">
             <block wx:for="{{sentence.sentences}}" wx:for-item="word">
               <text class="{{word.class}} {{word.highlight ? 'sentence__highlight' : ''}}" 

@@ -4,17 +4,19 @@
 page {
   --content-width: 654rpx;
   --margin: 48rpx;
+  --margin2: 96rpx;
   --margin-negative: -48rpx;
   --margin-grid: 28rpx;
   --grid: 20rpx;
   --grid2: 40rpx;
   --grid4: 80rpx;
+  --grid6: 120rpx;
   --subgrid: 10rpx;
   --subgrid2: 20rpx;
 
   --headline-font-size: 56rpx;
   --headline-line-height: 70rpx;
-  --headline-font-family: 'PingFang SC';
+  --headline-font-family: 'PingFang SC', 'SF Pro';
   --headline-font-weight: 500;
   
   --subtitle1-font-size: 40rpx;
@@ -340,19 +342,19 @@ page {
 }
 
 .paragraph__quote {
-  padding-top: var(--grid4);
-  padding-bottom: var(--grid4);
-  padding-left: var(--margin);
-  padding-right: var(--margin);
+  padding-top: var(--grid6);
+  padding-bottom: var(--grid6);
+  padding-left: var(--margin2);
+  padding-right: var(--margin2);
   background-color: var(--gray7);
   margin-top: var(--grid2);
 }
 .paragraph__quote__icon {
   position: absolute;
-  left: var(--margin-negative);
-  width: 120rpx;
-  height: 120rpx;
-  top: -130rpx;
+  left: -100rpx;
+  width: 200rpx;
+  height: 200rpx;
+  top: -90rpx;
   /* background-color: var(--secondary-color); */
   /* background-image: url("/images/quote.svg"); */
   /* -webkit-mask-image: "/images/quote.svg"; */
