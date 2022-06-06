@@ -313,12 +313,11 @@ page {
 
 .article-end {
   display: inline-flex;
+  align-items: center;
   position: relative;
   width: auto;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  margin-left: 4rpx;
+  height: auto;
+  box-sizing: border-box;
 }
 .article-end__icon {
   width: 32rpx;

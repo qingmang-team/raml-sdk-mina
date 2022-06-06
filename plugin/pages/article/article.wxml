@@ -65,7 +65,7 @@
                 bindtap="openLink">{{word.text}}</text>
             </block>
           </block>
-          <view wx:if="{{index === content.length - 1}}" class="article-end"><view class="article-end__icon" /></view>
+          <view wx:if="{{index === content.length - 1}}" class="article-end body1"><text decode="{{true}}">&nbsp;</text><view class="article-end__icon" /></view>
         </view>
       </view>
       <template is="note-attachmenets" wx:if="{{paragraph.highlight}}" data="{{highlight: paragraph.highlight}}"></template>
