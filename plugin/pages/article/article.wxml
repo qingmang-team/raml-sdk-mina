@@ -71,7 +71,7 @@
       <template is="note-attachmenets" wx:if="{{paragraph.highlight}}" data="{{highlight: paragraph.highlight}}"></template>
     </view>
     <!-- 图片 -->
-    <view wx:elif="{{paragraph.type == 1}}" class="paragraph__image">
+    <view wx:elif="{{paragraph.type == 1}}" class="paragraph__image" id="{{paragraph.id}}" bindtap="onParagraphClicked">
       <!-- 根据图片尺寸来做渲染 -->
       <block wx:if="{{paragraph.image.width > 0}}">
         <image wx:if="{{paragraph.decoration}}" src="{{paragraph.image.source}}"
@@ -119,6 +119,7 @@
 
 <view class="article__footer" wx:if="{{article}}" style="{{theme.style}}">
   <view class="article__footer__background" />
+  <view class="article__footer__background-2" />
 
   <view class="article-achievement__icon">
     <!-- <image class="article-achievement__icon" src="http://statics04.qingmang.mobi/521afecea49e.jpg" /> -->
@@ -129,9 +130,9 @@
   <button class="article-achievement__action button1" open-type="share"><image src="/images/check.svg"/>分享</button>
 
   <view wx:if="{{relativeArticles}}" class="article-relative section">
-    <view class="section-header subtitle1">{{relativeArticles.title}}</view>
+    <view class="section-header subtitle1">更多来自 {{article.from.name}} 每日星球读本</view>
     <navigator wx:for="{{relativeArticles.articles}}" wx:for-item="article" wx:key="id" 
-      class="article__compact card" hover-class="card__hover" url="plugin-private://wx13a6db3ed7ec76d1/pages/article/article?id={{article.id}}">
+      class="article__compact card" hover-class="card__hover" url="plugin-private://wx13a6db3ed7ec76d1/pages/article/article?id={{article.id}}&list_id={{article.from.listId}}">
       <view class="article__compact__icon button1">{{article.weekDay}}</view>
       <view class="article__compact__headline subtitle2">{{article.title}}</view>
       <view class="article__compact__provider subtitle4">{{article.provider}}</view>

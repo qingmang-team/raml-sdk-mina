@@ -1,6 +1,9 @@
-<navigator class="action" url="plugin://read-plugin/article-page?id=-2132495101603821140">
-  打开样文
+<navigator class="action" url="plugin://read-plugin/article-page?id=-2132495101603821140&list_id=m1">
+  样文，来自星球 A
 </navigator>
-<navigator class="action" url="plugin://read-plugin/article-page?id=2688851733755845116">
-  打开文章（含笔记）
+<navigator class="action" url="plugin://read-plugin/article-page?id=2688851733755845116&list_id=m1">
+  文章 1（含笔记），来自星球 A
+</navigator>
+<navigator class="action" url="plugin://read-plugin/article-page?id=6875288384253315763&list_id=m2">
+  文章 2，来自星球 B
 </navigator>

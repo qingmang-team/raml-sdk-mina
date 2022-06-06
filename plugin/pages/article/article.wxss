@@ -251,6 +251,20 @@ page {
   flex-grow: 0;
   z-index: -1;
 }
+.article__footer__background-2 {
+  position: absolute;
+  width: 750rpx;
+  height: 100%;
+  top: 300rpx;
+  overflow: hidden;
+
+  background: var(--gray7);
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  z-index: -1;
+}
 .article-achievement__icon {
   margin-top: 120rpx;
   width: 160rpx;
