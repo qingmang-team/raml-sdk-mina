@@ -131,7 +131,7 @@
   <view wx:if="{{relativeArticles}}" class="article-relative section">
     <view class="section-header subtitle1">{{relativeArticles.title}}</view>
     <navigator wx:for="{{relativeArticles.articles}}" wx:for-item="article" wx:key="id" 
-      class="article__compact card" hover-class="card__hover" url="plugin-private://wx13a6db3ed7ec76d1/pages/article/article?id={{article.id}}" bind:tap="onHack">
+      class="article__compact card" hover-class="card__hover" url="plugin-private://wx13a6db3ed7ec76d1/pages/article/article?id={{article.id}}">
       <view class="article__compact__icon button1">{{article.weekDay}}</view>
       <view class="article__compact__headline subtitle2">{{article.title}}</view>
       <view class="article__compact__provider subtitle4">{{article.provider}}</view>
