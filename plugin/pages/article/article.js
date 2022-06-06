@@ -3,6 +3,19 @@ import { parseRAML, convertNotesToHighlights, attachAllHighlights } from '../../
 
 const apiDomain = 'https://api.readland.cn'
 const weekDays = ['一', '二', '三', '四', '五', '六', '日']
+const magazineLists = {
+  m1: {
+    listId: 'm1',
+    icon: "http://statics04.qingmang.mobi/0fb54c6ede68.jpg",
+    color: '#E9D8B8',
+    name: 'HALO'
+  }, 
+  m2: {
+    listId: 'm2',
+    icon: "http://statics04.qingmang.mobi/d7d28918e567.jpg",
+    color: '#C0CAC3',
+    name: 'ALIA'
+  }}
 
 Page({
   /**
@@ -14,6 +27,7 @@ Page({
 
     // 加载文章数据
     this.id = options.id;
+    this.listId = options.list_id
     // 请求文章数据
     
     this.fetchArticle()
@@ -33,7 +47,6 @@ Page({
    * 跳转链接
    */
   openLink: function (event) {
-    console.log(event)
     let word = event.currentTarget.dataset.word
     if (!word) {
       return
@@ -53,7 +66,6 @@ Page({
    * 播放视频
    */
   playVideo: function (event) {
-    console.log(event)
   },
 
   initTheme: function() {
@@ -78,6 +90,7 @@ Page({
         console.log("load article success, ", res);
 
         that.event = res.data.events[0];
+        let from = magazineLists[that.listId]
         let listInfo = that.event.listsInfo[0];
         let article = that.event.article;
         let articleDate = formatTime(article.publishDate);
@@ -87,13 +100,12 @@ Page({
             id: that.id,
             title: article.title,
             intro: article.snippet,
+            images: article.images,
             author: {
               names: '书韵',
               avatar: 'http://statics04.qingmang.mobi/456a83aec821.jpg'
             },
-            from: {
-              icon: "http://statics04.qingmang.mobi/0fb54c6ede68.jpg"
-            },
+            from: from,
             provider: {
               title: listInfo.name,
               icon: listInfo.icon,
@@ -116,7 +128,7 @@ Page({
               name: '宽治'
             }]
           },
-          'theme.style': '--secondary-color:#E9D8B8;',
+          'theme.style': `--secondary-color:${from.color};`,
           readMinutes: 0
         });
         that.updateContent();
@@ -171,13 +183,13 @@ Page({
               id: event.article.docIdString,
               title: event.article.title,
               provider: event.listsInfo[event.listsInfo.length - 1].name,
-              weekDay: weekDays[new Date(event.article.docDate).getDay()]
+              weekDay: weekDays[new Date(event.article.docDate).getDay()],
+              from: magazineLists[that.listId]
             }
           })
           console.log("relative articles, ", articles);
           that.setData({
             relativeArticles: {
-              title: '更多来自 HALO 每日星球读本',
               articles: articles
             }
           })
@@ -197,6 +209,22 @@ Page({
       content: content
     })
     this.startTracking()
+  },
+  onParagraphClicked: function(event) {
+    const id = event.currentTarget.id
+    const paragraph = this.data.content.find( item => {
+      return item.id === id
+    })
+    if (paragraph.type === 1) {
+      let imageUrl = paragraph.image.source
+      let allImages = this.data.article.images.map( imageItem => {
+        return imageItem.url
+      })
+      wx.previewImage({
+        urls: allImages,
+        current: imageUrl
+      })
+    }
   },
   startTracking: function() {
     if (this.readingTickTimer) {
