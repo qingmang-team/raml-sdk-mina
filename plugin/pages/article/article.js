@@ -16,6 +16,9 @@ const magazineLists = {
     color: '#C0CAC3',
     name: 'ALIA'
   }}
+const dynaimcIcons = {
+  quote: '<?xml version="1.0" encoding="iso-8859-1"?><svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"	 viewBox="0 0 57 57" style="enable-background:new 0 0 57 57;" xml:space="preserve"><rect x="0" y="0" style="fill:none;" width="57" height="57"/><g>	<circle style="fill:#FFFFFF;" cx="18.5" cy="31.5" r="5.5"/>	<path style="fill:#FFFFFF;" d="M18.5,38c-3.584,0-6.5-2.916-6.5-6.5s2.916-6.5,6.5-6.5s6.5,2.916,6.5,6.5S22.084,38,18.5,38z		 M18.5,27c-2.481,0-4.5,2.019-4.5,4.5s2.019,4.5,4.5,4.5s4.5-2.019,4.5-4.5S20.981,27,18.5,27z"/></g><g>	<circle style="fill:#FFFFFF;" cx="35.5" cy="31.5" r="5.5"/>	<path style="fill:#FFFFFF;" d="M35.5,38c-3.584,0-6.5-2.916-6.5-6.5s2.916-6.5,6.5-6.5s6.5,2.916,6.5,6.5S39.084,38,35.5,38z		 M35.5,27c-2.481,0-4.5,2.019-4.5,4.5s2.019,4.5,4.5,4.5s4.5-2.019,4.5-4.5S37.981,27,35.5,27z"/></g><path style="fill:#FFFFFF;" d="M13,32c-0.553,0-1-0.447-1-1c0-7.72,6.28-14,14-14c0.553,0,1,0.447,1,1s-0.447,1-1,1	c-6.617,0-12,5.383-12,12C14,31.553,13.553,32,13,32z"/><path style="fill:#FFFFFF;" d="M30,32c-0.553,0-1-0.447-1-1c0-7.72,6.28-14,14-14c0.553,0,1,0.447,1,1s-0.447,1-1,1	c-6.617,0-12,5.383-12,12C31,31.553,30.553,32,30,32z"/></svg>'
+}
 
 Page({
   /**
@@ -95,6 +98,7 @@ Page({
         let article = that.event.article;
         let articleDate = formatTime(article.publishDate);
 
+        that.generateIcon('quote', from.color);
         that.setData({
           article: {
             id: that.id,
@@ -280,5 +284,16 @@ Page({
       readMinutes: Math.round(this.readingDuration / 60)
     })
     console.log(`[reading] update tracking, read ${this.readingDuration}`)
+  },
+  generateIcon: function (name, color) {
+    let baseSvg = dynaimcIcons[name]
+    let colorSvg = 'data:image/svg+xml,' + encodeURIComponent(baseSvg.replace(/#FFFFFF/g, color));
+    this.setData({
+      [`${name}Icon`]: colorSvg
+    })
+
+    // this.setData({
+    //   quoteIcon: 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgNTcgNTciIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDU3IDU3OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8cmVjdCB4PSIwIiB5PSIwIiBzdHlsZT0iZmlsbDpub25lOyIgd2lkdGg9IjU3IiBoZWlnaHQ9IjU3Ii8+DQo8Zz4NCgk8Y2lyY2xlIHN0eWxlPSJmaWxsOiNCREMzQzc7IiBjeD0iMTguNSIgY3k9IjMxLjUiIHI9IjUuNSIvPg0KCTxwYXRoIHN0eWxlPSJmaWxsOiNCREMzQzc7IiBkPSJNMTguNSwzOGMtMy41ODQsMC02LjUtMi45MTYtNi41LTYuNXMyLjkxNi02LjUsNi41LTYuNXM2LjUsMi45MTYsNi41LDYuNVMyMi4wODQsMzgsMTguNSwzOHoNCgkJIE0xOC41LDI3Yy0yLjQ4MSwwLTQuNSwyLjAxOS00LjUsNC41czIuMDE5LDQuNSw0LjUsNC41czQuNS0yLjAxOSw0LjUtNC41UzIwLjk4MSwyNywxOC41LDI3eiIvPg0KPC9nPg0KPGc+DQoJPGNpcmNsZSBzdHlsZT0iZmlsbDojQkRDM0M3OyIgY3g9IjM1LjUiIGN5PSIzMS41IiByPSI1LjUiLz4NCgk8cGF0aCBzdHlsZT0iZmlsbDojQkRDM0M3OyIgZD0iTTM1LjUsMzhjLTMuNTg0LDAtNi41LTIuOTE2LTYuNS02LjVzMi45MTYtNi41LDYuNS02LjVzNi41LDIuOTE2LDYuNSw2LjVTMzkuMDg0LDM4LDM1LjUsMzh6DQoJCSBNMzUuNSwyN2MtMi40ODEsMC00LjUsMi4wMTktNC41LDQuNXMyLjAxOSw0LjUsNC41LDQuNXM0LjUtMi4wMTksNC41LTQuNVMzNy45ODEsMjcsMzUuNSwyN3oiLz4NCjwvZz4NCjxwYXRoIHN0eWxlPSJmaWxsOiNCREMzQzc7IiBkPSJNMTMsMzJjLTAuNTUzLDAtMS0wLjQ0Ny0xLTFjMC03LjcyLDYuMjgtMTQsMTQtMTRjMC41NTMsMCwxLDAuNDQ3LDEsMXMtMC40NDcsMS0xLDENCgljLTYuNjE3LDAtMTIsNS4zODMtMTIsMTJDMTQsMzEuNTUzLDEzLjU1MywzMiwxMywzMnoiLz4NCjxwYXRoIHN0eWxlPSJmaWxsOiNCREMzQzc7IiBkPSJNMzAsMzJjLTAuNTUzLDAtMS0wLjQ0Ny0xLTFjMC03LjcyLDYuMjgtMTQsMTQtMTRjMC41NTMsMCwxLDAuNDQ3LDEsMXMtMC40NDcsMS0xLDENCgljLTYuNjE3LDAtMTIsNS4zODMtMTIsMTJDMzEsMzEuNTUzLDMwLjU1MywzMiwzMCwzMnoiLz4NCjwvc3ZnPg0K'
+    // })
   }
 })

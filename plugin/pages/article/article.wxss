@@ -373,6 +373,18 @@ page {
   /* -webkit-mask-image: "/images/quote.svg"; */
 }
 
+.paragraph__quote__icon-mask {
+  -webkit-mask-image: '/images/check1.svg';
+  mask-image: '/images/check1.svg';
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+.paragraph__quote__icon-background {
+  width: 100%;
+  height: 100%;
+  background: var(--secondary-color);
+}
+
 .paragraph__title:first-child,
 .paragraph__text:first-child,
 .paragraph__image:first-child,
@@ -454,6 +466,9 @@ button {
   padding: 20rpx 30rpx !important;
   flex-direction: row;
   align-items: flex-start;
+  border: none;
+}
+button::after {
   border: none;
 }
 button>image {
