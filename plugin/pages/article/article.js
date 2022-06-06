@@ -20,6 +20,15 @@ Page({
     this.fetchNotes()
     this.fetchRelativeArticles()
   },
+  onShow: function (options) {
+    this.startTracking()
+  },
+  onHide: function () {
+    this.stopTracking()
+  },
+  onUnload: function () {
+    this.stopTracking()
+  },
   /**
    * 跳转链接
    */
@@ -107,7 +116,8 @@ Page({
               name: '宽治'
             }]
           },
-          'theme.style': '--secondary-color:#E9D8B8;'
+          'theme.style': '--secondary-color:#E9D8B8;',
+          readMinutes: 0
         });
         that.updateContent();
       }
@@ -128,7 +138,6 @@ Page({
       },
       success: function (res) {
         console.log("load notes success, ", res);
-        // that.updateContent();
 
         let notes = res.data.notes
         if (notes && notes.length > 0) {
@@ -187,8 +196,61 @@ Page({
     this.setData({
       content: content
     })
+    this.startTracking()
   },
-  onHack: function(event) {
-    console.log('card click', event)
+  startTracking: function() {
+    if (this.readingTickTimer) {
+      console.log(`[reading] timer repeated, ignore`)
+      return
+    }
+    if (!this.data.content) {
+      console.log(`[reading] content not read, ignore`)
+      return
+    }
+
+    let readSeconds = 0
+    try {
+      readSeconds = parseFloat(wx.getStorageSync(`${this.id}-reading`))
+    } catch (e) {
+    }
+    if (!readSeconds) {
+      readSeconds = 0
+    }
+
+    // 开始更新
+    if (!this.readingTickTimer) {
+      this.readingDuration = readSeconds
+      this.readingStarted = new Date().getTime()
+      this.readingTickTimer = setInterval(async () => {
+        this.updateTracking()
+      }, 5000)
+    }
+    this.setData({
+      readMinutes: Math.round(readSeconds / 60)
+    })
+    console.log(`[reading] start tracking, last read ${readSeconds}`)
+  },
+  stopTracking: function() {
+    if (this.readingTickTimer) {
+      this.updateTracking()
+      clearInterval(this.readingTickTimer)
+      this.readingTickTimer = null
+
+      console.log(`[reading] stop tracking`)
+    }
+  },
+  updateTracking: function() {
+    let current = new Date().getTime()
+    this.readingDuration += Math.round((current - this.readingStarted) / 1000)
+    try {
+      wx.setStorageSync(`${this.id}-reading`, this.readingDuration)
+    } catch (e) {
+      console.log(`[reading] record tracking failed, error ${e}`)
+    }
+    this.readingStarted = current
+    this.setData({
+      readMinutes: Math.round(this.readingDuration / 60)
+    })
+    console.log(`[reading] update tracking, read ${this.readingDuration}`)
   }
 })
