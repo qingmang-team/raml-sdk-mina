@@ -59,7 +59,8 @@ Page({
   },
 
   initTheme: function() {
-    loadFont('quote-font', 'ninz-dev-FZXBSJT.ttf')
+    loadFont('qingmang-text-font', 'qingmang_text_light_v1.otf')
+    loadFont('qingmang-display-font', 'qingmang_display_light_v1.otf')  
   },
 
   fetchArticle: function() {

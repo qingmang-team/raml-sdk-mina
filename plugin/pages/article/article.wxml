@@ -29,7 +29,7 @@
 
   <view class="article__header__bottom">
     <image wx:if="{{article.from}}" class="article__from" mode="heightFix" src="{{article.from.icon}}" />
-    <view wx:if="{{article.title}}" class="article__headline headline-read">{{article.title}}</view>
+    <view wx:if="{{article.title}}" class="article__headline title-read">{{article.title}}</view>
     <view wx:if="{{article.intro}}" class="article__intro body1-read">{{article.intro}}</view>
 
     <!-- 其它信息 -->
