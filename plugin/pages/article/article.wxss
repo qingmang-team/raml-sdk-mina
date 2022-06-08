@@ -14,11 +14,16 @@ page {
   --subgrid: 10rpx;
   --subgrid2: 20rpx;
 
+  --title-font-size: 68rpx;
+  --title-line-height: 80rpx;
+  --title-font-family: 'PingFang SC', 'SF Pro';
+  --title-font-weight: 500;
+  
   --headline-font-size: 56rpx;
   --headline-line-height: 70rpx;
   --headline-font-family: 'PingFang SC', 'SF Pro';
   --headline-font-weight: 500;
-  
+
   --subtitle1-font-size: 40rpx;
   --subtitle1-line-height: 60rpx;
   --subtitle1-font-family: 'PingFang SC', 'SF Pro';
@@ -46,7 +51,7 @@ page {
 
   --quote1-font-size: 40rpx;
   --quote1-line-height: 50rpx;
-  --quote1-font-family: 'quote-font';
+  --quote1-font-family: 'qingmang-text-font';
   --quote1-font-weight: 300;
   
   --caption1-font-size: 28rpx;
@@ -72,6 +77,20 @@ page {
 /**
  * Theme Class
  **/
+.title {
+  font-size: var(--title-font-size);
+  font-family: var(--title-font-family);
+  font-weight: var(--title-font-weight);
+  line-height: var(--title-line-height);
+  color: var(--gray100);
+}
+.title-read {
+  font-size: var(--title-font-size);
+  font-family: 'qingmang-display-font';
+  font-weight: 200;
+  line-height: var(--title-line-height);
+  color: var(--gray100);
+}
 .headline {
   font-size: var(--headline-font-size);
   font-family: var(--headline-font-family);
@@ -81,7 +100,7 @@ page {
 }
 .headline-read {
   font-size: var(--headline-font-size);
-  font-family: 'quote-font';
+  font-family: 'qingmang-display-font';
   font-weight: 200;
   line-height: var(--headline-line-height);
   color: var(--gray100);
@@ -102,7 +121,7 @@ page {
 }
 .body1-read {
   font-size: var(--body1-font-size);
-  font-family: 'quote-font';
+  font-family: 'qingmang-text-font';
   font-weight: 300;
   line-height: var(--body1-line-height);
   color: var(--gray100);
