@@ -109,6 +109,8 @@ Page({
             date: articleDate,
             textLength: article.textLength,
             readCount: that.event.readCount,
+            markCount: that.event.markCount,
+            shareCount: that.event.shareCount,
             readMinutes: Math.round(that.event.allUserReadSeconds / 60),
             markers: that.event.markUsers
           },
