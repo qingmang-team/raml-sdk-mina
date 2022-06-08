@@ -131,7 +131,6 @@ page {
   font-weight: var(--body1-font-weight);
   line-height: var(--body1-line-height);
   color: var(--gray100);
-  word-wrap: break-word;
 }
 .body1-read {
   font-size: var(--body1-font-size);
@@ -429,6 +428,11 @@ page {
   margin-top: var(--grid2);
 }
 
+.paragraph__text {
+  word-break: normal;
+  white-space: pre-wrap;
+}
+
 .paragraph__quote {
   padding-top: var(--grid6);
   padding-bottom: var(--grid6);
@@ -517,6 +521,9 @@ page {
 .sentence__bold {
   font-weight: 600;
   color: var(--base-color);
+
+  word-break: break-all;
+  white-space: pre-wrap;
 }
 .sentence__em {
   font-style: italic;
