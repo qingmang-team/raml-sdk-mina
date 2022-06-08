@@ -1,5 +1,6 @@
 {
   "pages": {
-    "article-page": "pages/article/article"
+    "article-page": "pages/article/article",
+    "magazine-page": "pages/magazine/magazine"
   }
 }
