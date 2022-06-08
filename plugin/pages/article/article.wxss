@@ -53,6 +53,11 @@ page {
   --quote1-line-height: 50rpx;
   --quote1-font-family: 'qingmang-text-font';
   --quote1-font-weight: 300;
+
+  --quote2-font-size: 34rpx;
+  --quote2-line-height: 40rpx;
+  --quote2-font-family: 'qingmang-text-font';
+  --quote2-font-weight: 300;
   
   --caption1-font-size: 28rpx;
   --caption1-line-height: 40rpx;
@@ -111,6 +116,13 @@ page {
   font-family: var(--quote1-font-family);
   font-weight: var(--quote1-font-weight);
   line-height: var(--quote1-line-height);
+  color: var(--gray100);
+}
+.quote2 {
+  font-size: var(--quote2-font-size);
+  font-family: var(--quote2-font-family);
+  font-weight: var(--quote2-font-weight);
+  line-height: var(--quote2-line-height);
   color: var(--gray100);
 }
 .body1 {
@@ -263,10 +275,6 @@ page {
   margin-left: var(--margin);
   margin-right: var(--margin);
 }
-.article__from {
-  height: 60rpx;
-  width: 180rpx;
-}
 .article__headline {
   margin-top: var(--grid);
 }
@@ -284,7 +292,10 @@ page {
   display: flex;
   flex-direction: column;
 }
-
+.article__provider__logotype {
+  height: 50rpx;
+  width: 150rpx;
+}
 .article__footer {
   position: relative;
   display: flex;
@@ -350,6 +361,11 @@ page {
   flex-direction: column;
   align-items: center;
 }
+.article__from {
+  height: 60rpx;
+  width: 180rpx;
+  margin-top: var(--grid);
+}
 .article__compact {
   display: flex;
   flex-direction: column;
@@ -410,6 +426,11 @@ page {
   padding-top: var(--grid);
   padding-bottom: var(--grid);
   margin-top: var(--grid2);
+}
+
+.paragraph__text {
+  word-break: normal;
+  white-space: pre-wrap;
 }
 
 .paragraph__quote {
@@ -500,6 +521,9 @@ page {
 .sentence__bold {
   font-weight: 600;
   color: var(--base-color);
+
+  word-break: break-all;
+  white-space: pre-wrap;
 }
 .sentence__em {
   font-style: italic;

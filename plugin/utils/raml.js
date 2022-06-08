@@ -115,7 +115,7 @@ const buildTextDomTree = function(paragraph, sentences, words) {
     class: null,
   }
   if (paragraph.blockquote >= 1) {
-    view.class = 'paragraph__blockquote quote1'
+    view.class = 'paragraph__blockquote quote2'
   } else if (text.linetype === 'aside') {
     view.class = 'paragraph__aside body1'
   } else {
@@ -295,7 +295,7 @@ const buildParagraph = (paragraph) => {
       const text = paragraph.text
       // blockquote 的样式
       if (paragraph.blockquote >= 1) {
-        text.class = 'paragraph__blockquote quote1'
+        text.class = 'paragraph__blockquote quote2'
       } else {
         switch (text.linetype) {
           case 'aside':
