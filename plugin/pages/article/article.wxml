@@ -46,7 +46,7 @@
     <view class="article__byline">
       <image wx:if="{{article.author && article.author.avatar}}" class="avatar__medium" style="margin-right: 10rpx;" mode="aspectFill" src="{{article.author.avatar}}" />
       <view class="article__provider">
-        <view wx:if="{{article.author && article.author.names}}" class="subtitle4 secondary">{{article.author.names}}</view>
+        <view wx:if="{{article.author && article.author.names}}" class="subtitle4">{{article.author.names}}</view>
         <view><text class="subtitle4 secondary">{{article.provider.name}}</text><text class="caption1"> · {{article.date}}</text></view>
       </view>
     </view>
