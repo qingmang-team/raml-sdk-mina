@@ -64,6 +64,7 @@ page {
   --button1-font-family: 'PingFang SC', 'SF Pro';
   --button1-font-weight: 500;
 
+  --base-color: #000;
   --canvas-color: #fff;
   --secondary-color: #E9D8B8;
   --on-secondary-color: rgba(255, 255, 255, 0.72);
@@ -162,7 +163,11 @@ page {
   color: var(--gray100);
 }
 .secondary {
-  color: var(--secondary-color);
+  color: var(--secondary-color) !important;
+}
+.bold {
+  font-size: 600 !important;
+  color: var(--base-color) !important;
 }
 
 /**
@@ -461,6 +466,7 @@ page {
 }
 .sentence__bold {
   font-weight: 500;
+  color: var(--base-color);
 }
 .sentence__em {
   font-style: italic;
