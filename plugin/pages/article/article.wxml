@@ -41,9 +41,10 @@
   <view class="article__header__bottom">
     <block wx:if="{{article.provider}}">
       <image wx:if="{{article.provider.logotype}}" class="article__provider__logotype" mode="heightFix" src="{{article.provider.logotype}}" />
-      <block wx:elif="{{article.provider.icon}}">
-        <image wx:if="{{article.provider.icon}}" class="article__provider__logotype" src="{{article.provider.icon}}" />
-      </block>
+      <view wx:elif="{{article.provider.icon}}" style="display:flex; align-items:center;">
+        <image wx:if="{{article.provider.icon}}" class="article__provider__icon" src="{{article.provider.icon}}" />
+        <text class="subtitle2">{{article.provider.name}}</text>
+      </view>
     </block>
     
     <view wx:if="{{article.title}}" class="article__headline title-read">{{article.title}}</view>

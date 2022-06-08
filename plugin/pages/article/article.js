@@ -80,7 +80,7 @@ Page({
     })
 
     loadFont('qingmang-text-font', 'qingmang_text_light_v1.otf')
-    loadFont('qingmang-display-font', 'qingmang_display_light_v1.otf')  
+    loadFont('qingmang-display-font', 'qingmang-display-thin_v1.otf')  
   },
 
   fetchArticle: function() {

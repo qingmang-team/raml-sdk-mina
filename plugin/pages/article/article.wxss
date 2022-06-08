@@ -296,6 +296,11 @@ page {
   height: 50rpx;
   width: 150rpx;
 }
+.article__provider__icon {
+  height: 40rpx;
+  width: 40rpx;
+  margin-right: var(--subgrid);
+}
 .article__footer {
   position: relative;
   display: flex;
