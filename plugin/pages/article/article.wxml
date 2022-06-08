@@ -39,7 +39,13 @@
   </view>
 
   <view class="article__header__bottom">
-    <image wx:if="{{article.provider && article.provider.logotype}}" class="article__provider__logotype" mode="heightFix" src="{{article.provider.logotype}}" />
+    <block wx:if="{{article.provider}}">
+      <image wx:if="{{article.provider.logotype}}" class="article__provider__logotype" mode="heightFix" src="{{article.provider.logotype}}" />
+      <block wx:elif="{{article.provider.icon}}">
+        <image wx:if="{{article.provider.icon}}" class="article__provider__logotype" src="{{article.provider.icon}}" />
+      </block>
+    </block>
+    
     <view wx:if="{{article.title}}" class="article__headline title-read">{{article.title}}</view>
     <view wx:if="{{article.intro}}" class="article__intro body1-read">{{article.intro}}</view>
 
@@ -48,7 +54,7 @@
       <image wx:if="{{article.author && article.author.avatar}}" class="avatar__medium" style="margin-right: 10rpx;" mode="aspectFill" src="{{article.author.avatar}}" />
       <view class="article__provider">
         <view wx:if="{{article.author && article.author.names}}" class="subtitle4">{{article.author.names}}</view>
-        <view><text class="subtitle4 secondary">{{article.provider.name}}</text><text class="caption1"> · {{article.date}}</text></view>
+        <view><text class="caption1">{{article.date}}</text></view>
       </view>
     </view>
     <view class="divider" />
