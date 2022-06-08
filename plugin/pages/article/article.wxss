@@ -127,6 +127,13 @@ page {
   line-height: var(--body1-line-height);
   color: var(--gray100);
 }
+.body2 {
+  font-size: var(--body2-font-size);
+  font-family: var(--body2-font-family);
+  font-weight: var(--body2-font-weight);
+  line-height: var(--body2-line-height);
+  color: var(--gray100);
+}
 .caption1 {
   font-size: var(--caption1-font-size);
   font-family: var(--caption1-font-family);
@@ -166,7 +173,7 @@ page {
   color: var(--secondary-color) !important;
 }
 .bold {
-  font-size: 600 !important;
+  font-weight: 600 !important;
   color: var(--base-color) !important;
 }
 
@@ -465,18 +472,22 @@ page {
   margin-top: 0;
 }
 .sentence__bold {
-  font-weight: 500;
+  font-weight: 600;
   color: var(--base-color);
 }
 .sentence__em {
   font-style: italic;
 }
 .sentence__link {
-  /*border-bottom: #000 dashed 1px;*/
+  font-weight: 600;
+  color: var(--base-color);
+
   text-decoration: underline;
+  text-decoration-color: var(--gray100);
+  text-underline-offset: 4rpx;
 }
 .sentence__highlight {
-  background-color: var(--gray7)
+  background-color: var(--gray7);
 }
 
 video {
@@ -506,7 +517,10 @@ button>image {
   width: 750rpx;
   margin-left: var(--margin-negative);
 
-  margin-bottom: var(--subgrid);
+  margin-top: var(--grid);
+}
+.attachmenets-annotations {
+  margin-top: var(--grid);
 }
 .avatars {
   padding-left: var(--margin);
@@ -531,11 +545,8 @@ button>image {
   padding-top: var(--grid);
   padding-bottom: var(--grid);
 
-  font-size: var(--body2-font-size);
-  font-family: var(--body2-font-family);
-  font-weight: var(--body2-font-weight);
-  line-height: var(--body2-line-height);
-  color: var(--gray100);
-
   background-color: var(--gray7);
+}
+.attachmenets__annotation__footer {
+  margin-top: var(--subgrid);
 }

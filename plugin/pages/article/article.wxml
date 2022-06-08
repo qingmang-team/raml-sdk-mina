@@ -11,13 +11,14 @@
     <template is="avatars" data="{{users: highlight.users, meta: (highlight.number > 1 ? (highlight.number + ' 人') : '') + '马克了' }}"></template>
 
     <!-- notes -->
-    <block wx:if="{{highlight.annotationList && highlight.annotationList.length > 0}}">
+    <view wx:if="{{highlight.annotationList && highlight.annotationList.length > 0}}" class="attachmenets-annotations">
       <block wx:for="{{highlight.annotationList}}" wx:for-item="note" wx:key="id">
-        <view wx:if="{{note.annotation.text}}" class="attachmenets__annotation__text">
-          <text style="font-weight: 600">{{note.user.name}} · </text><text>{{ note.annotation.text}}</text>
+        <view wx:if="{{note.annotation.text}}" class="attachmenets__annotation__text body2">
+          <text class="bold">{{note.user.name}} · </text><text selectable>{{note.annotation.text}}</text>
+          <view class="attachmenets__annotation__footer caption1">{{note.date}}<block wx:if="{{note.reason}}"> · {{note.reason}}</block></view>
         </view>
       </block>
-    </block>
+    </view>
   </view>
 </template>
 
@@ -63,7 +64,8 @@
             <block wx:for="{{sentence.sentences}}" wx:for-item="word">
               <text class="{{word.class}} {{word.highlight ? 'sentence__highlight' : ''}}" 
                 data-word="{{word}}"
-                bindtap="openLink">{{word.text}}</text>
+                bindtap="openLink"
+                selectable>{{word.text}}</text>
             </block>
           </block>
           <view wx:if="{{index === content.length - 1}}" class="article-end body1"><text decode="{{true}}">&nbsp;</text><view class="article-end__icon" /></view>
@@ -129,7 +131,7 @@
   <view class="article-achievement__meta caption1">共 {{article.textLength}} 字，你读了 {{readMinutes}} 分钟</view>
   <view class="article-achievement__meta caption1">共有 {{article.readCount}} 人读过 · 共阅读 {{article.readMinutes}} 分钟</view>
   <view class="article-achievement__meta caption1">{{article.shareCount}} 人分享 · {{article.markCount}} 人马克</view>
-  <button class="article-achievement__action button1" open-type="share"><image src="/images/check.svg"/>分享</button>
+  <button class="article-achievement__action button1" open-type="share"><image src="/images/share.svg"/>分享</button>
 
   <view wx:if="{{relativeArticles}}" class="article-relative section">
     <view class="section-header subtitle1">更多来自 {{article.from.name}} 每日星球读本</view>
