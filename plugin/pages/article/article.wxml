@@ -11,13 +11,13 @@
     <template is="avatars" data="{{users: highlight.users, meta: (highlight.number > 1 ? (highlight.number + ' 人') : '') + '马克了' }}"></template>
 
     <!-- notes -->
-    <block wx:if="{{highlight.annotationList && highlight.annotationList.length > 0}}">
+    <view wx:if="{{highlight.annotationList && highlight.annotationList.length > 0}}" class="attachmenets-annotations">
       <block wx:for="{{highlight.annotationList}}" wx:for-item="note" wx:key="id">
         <view wx:if="{{note.annotation.text}}" class="attachmenets__annotation__text">
-          <text style="font-weight: 600">{{note.user.name}} · </text><text>{{ note.annotation.text}}</text>
+          <text style="bold">{{note.user.name}} · </text><text>{{ note.annotation.text}}</text>
         </view>
       </block>
-    </block>
+    </view>
   </view>
 </template>
 

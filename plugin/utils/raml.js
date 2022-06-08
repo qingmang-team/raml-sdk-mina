@@ -418,6 +418,9 @@ export const attachAllHighlights = function(paragraphs, highlights) {
             }
           }
           // 计算该段出现的评论信息.
+          if (note.annotationType > 0) {
+            console.log('xxxxxxx', note)
+          }
           if (
             note.annotation &&
             (note.annotation.text || note.annotation.images.length)

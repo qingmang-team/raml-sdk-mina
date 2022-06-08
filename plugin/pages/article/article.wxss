@@ -506,7 +506,10 @@ button>image {
   width: 750rpx;
   margin-left: var(--margin-negative);
 
-  margin-bottom: var(--subgrid);
+  margin-top: var(--grid);
+}
+.attachmenets-annotations {
+  margin-top: var(--grid);
 }
 .avatars {
   padding-left: var(--margin);
