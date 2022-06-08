@@ -27,6 +27,10 @@
   <image src="/images/back.svg" style="width: 12px;height: 24px;" />
 </navigator>
 
+<view wx:if="{{!article}}" class="loading" style="top:{{navigation.bottom + 40}}px">
+  <i class="loading-icon"></i>
+</view>
+
 <!-- 文章标题 -->
 <view class="article__header" style="{{theme.style}}">
   <view class="article__header__top" style="margin-top:{{navigation.bottom + 10}}px">
