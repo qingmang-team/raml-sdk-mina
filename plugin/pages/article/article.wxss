@@ -139,14 +139,14 @@ page {
   font-family: var(--subtitle1-font-family);
   font-weight: var(--subtitle1-font-weight);
   line-height: var(--subtitle1-line-height);
-  color: var(--gray100);
+  color: var(--base-color);
 }
 .subtitle2 {
   font-size: var(--subtitle2-font-size);
   font-family: var(--subtitle2-font-family);
   font-weight: var(--subtitle2-font-weight);
   line-height: var(--subtitle2-line-height);
-  color: var(--gray100);
+  color: var(--base-color);
 }
 .subtitle4 {
   font-size: var(--subtitle4-font-size);
