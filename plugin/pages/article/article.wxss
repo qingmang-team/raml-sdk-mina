@@ -229,6 +229,10 @@ page {
   width: 48rpx;
   border-radius: 24rpx;
 }
+.icon__xs {
+  width: 40rpx;
+  height: 40rpx;
+}
 .navigation__container {
   background: rgba(255, 255, 255, 0.8);
   border: 0.5px solid rgba(151, 151, 151, 0.5);
@@ -295,6 +299,11 @@ page {
 .article__provider__logotype {
   height: 50rpx;
   width: 150rpx;
+}
+.article__provider__icon {
+  height: 40rpx;
+  width: 40rpx;
+  margin-right: var(--subgrid);
 }
 .article__footer {
   position: relative;
@@ -406,12 +415,6 @@ page {
   width: auto;
   height: auto;
   box-sizing: border-box;
-}
-.article-end__icon {
-  width: 32rpx;
-  height: 32rpx;
-  background-color: var(--secondary-color);
-  border-radius: 16rpx;
 }
 
 .paragraph__title,
