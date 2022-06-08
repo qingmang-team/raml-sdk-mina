@@ -67,6 +67,7 @@ Page({
     // TODO 展示 loading
     var that = this;
     var payloads = {
+      token: 'MzE0ZmUxZGUtYzUwYi0xMWVjLWIyODMtMDAxNjNlMTBiYjdh',
       doc_id: this.id,
       list_id: this.listId,
       template: 'raml'
@@ -112,7 +113,7 @@ Page({
             markCount: that.event.markCount,
             shareCount: that.event.shareCount,
             readMinutes: Math.round(that.event.allUserReadSeconds / 60),
-            markers: that.event.markUsers
+            markers: (that.event.markUsers || []).slice(0, 3)
           },
           'theme.style': `--secondary-color:${from.color};`,
           readMinutes: 0
@@ -150,7 +151,6 @@ Page({
   fetchRelativeArticles: function() {
     var that = this;
     var payloads = {
-      // token: 'MzE0ZmUxZGUtYzUwYi0xMWVjLWIyODMtMDAxNjNlMTBiYjdh',
       doc_id: this.id,
       list_id: this.listId,
     }

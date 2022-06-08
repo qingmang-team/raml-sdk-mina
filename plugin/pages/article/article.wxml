@@ -2,7 +2,7 @@
   <view class="avatars">
     <image wx:for="{{users}}" wx:for-item="user" wx:key="uid" 
       class="avatars__icon avatar__small" src="{{user.avatar}}" />
-    <text class="avatars__meta caption1"><text class="subtitle4">{{name}}</text>{{meta}}</text>
+    <text class="avatars__meta caption1"><text class="subtitle4 bold">{{name}}</text>{{meta}}</text>
   </view>
 </template>
 <template name="note-attachmenets">
@@ -37,7 +37,7 @@
       <image wx:if="{{article.author && article.author.avatar}}" class="avatar__medium" style="margin-right: 10rpx;" mode="aspectFill" src="{{article.author.avatar}}" />
       <view class="article__provider">
         <view wx:if="{{article.author && article.author.names}}" class="subtitle4 secondary">{{article.author.names}}</view>
-        <view><text class="subtitle4">{{article.provider.name}}</text><text class="caption1"> · {{article.date}}</text></view>
+        <view><text class="subtitle4 secondary">{{article.provider.name}}</text><text class="caption1"> · {{article.date}}</text></view>
       </view>
     </view>
     <view class="divider" />
