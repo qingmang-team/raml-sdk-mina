@@ -114,8 +114,8 @@ const buildTextDomTree = function(paragraph, sentences, words) {
     sentences: [],
     class: null,
   }
-  if (paragraph.blockquote === 1) {
-    view.class = 'paragraph__quote quote1'
+  if (paragraph.blockquote >= 1) {
+    view.class = 'paragraph__blockquote quote1'
   } else if (text.linetype === 'aside') {
     view.class = 'paragraph__aside body1'
   } else {
@@ -294,8 +294,8 @@ const buildParagraph = (paragraph) => {
       // 计算样式标签
       const text = paragraph.text
       // blockquote 的样式
-      if (paragraph.blockquote === 1) {
-        text.class = 'paragraph__quote quote1'
+      if (paragraph.blockquote >= 1) {
+        text.class = 'paragraph__blockquote quote1'
       } else {
         switch (text.linetype) {
           case 'aside':

@@ -463,7 +463,7 @@ page {
 
 .paragraph__title + .paragraph__text,
 .paragraph__title + .paragraph__image,
-.paragraph__title + .paragraph__blockquote,
+/* .paragraph__title + .paragraph__blockquote, */
 .paragraph__title + .paragraph__list,
 .paragraph__title + .paragraph__audio,
 .paragraph__title + .paragraph__video {
@@ -485,8 +485,7 @@ page {
 }
 
 .paragraph__blockquote {
-  border-left: #000 1px solid;
-  padding-left: var(--subgrid2);
+  padding-left: var(--grid2);
 }
 
 .style_aside {
