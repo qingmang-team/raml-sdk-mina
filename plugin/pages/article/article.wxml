@@ -29,6 +29,7 @@
 
 <view wx:if="{{!article}}" class="loading" style="top:{{navigation.bottom + 40}}px">
   <i class="loading-icon"></i>
+  <view><text class="title-read"> </text><text class="body1-read"> </text></view>
 </view>
 
 <!-- 文章标题 -->
