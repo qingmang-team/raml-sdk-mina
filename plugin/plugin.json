@@ -1,8 +1,5 @@
 {
   "pages": {
     "article-page": "pages/article/article"
-  },
-  "usingComponents": {
-    "read-icon": "./components/icon/read-icon"
   }
 }
