@@ -44,9 +44,19 @@ Page({
 
     for (var i = 0; i < word.markups.length; i++) {
       if (word.markups[i].tag === 'a') {
-        const url = word.markups[i].source
-        wx.setClipboardData({
-          data: url
+        wx.showModal({
+          content: '小程序内不能打开外部链接，你可以复制链接地址后到外部浏览器打开。',
+          showCancel: true,
+          cancelText: '取消',
+          confirmText: '复制链接',
+          success: (res) => {
+            if (res.confirm) {
+              const url = word.markups[i].source
+              wx.setClipboardData({
+                data: url
+              })
+            }
+          }
         })
         break
       }

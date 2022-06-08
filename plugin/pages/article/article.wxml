@@ -13,8 +13,9 @@
     <!-- notes -->
     <view wx:if="{{highlight.annotationList && highlight.annotationList.length > 0}}" class="attachmenets-annotations">
       <block wx:for="{{highlight.annotationList}}" wx:for-item="note" wx:key="id">
-        <view wx:if="{{note.annotation.text}}" class="attachmenets__annotation__text">
+        <view wx:if="{{note.annotation.text}}" class="attachmenets__annotation__text body2">
           <text style="bold">{{note.user.name}} · </text><text>{{ note.annotation.text}}</text>
+          <view class="attachmenets__annotation__footer caption1">{{note.date}} · {{note.reason}}</view>
         </view>
       </block>
     </view>

@@ -127,6 +127,13 @@ page {
   line-height: var(--body1-line-height);
   color: var(--gray100);
 }
+.body2 {
+  font-size: var(--body2-font-size);
+  font-family: var(--body2-font-family);
+  font-weight: var(--body2-font-weight);
+  line-height: var(--body2-line-height);
+  color: var(--gray100);
+}
 .caption1 {
   font-size: var(--caption1-font-size);
   font-family: var(--caption1-font-family);
@@ -472,11 +479,11 @@ page {
   font-style: italic;
 }
 .sentence__link {
-  /*border-bottom: #000 dashed 1px;*/
-  text-decoration: underline;
+  border-bottom: #000 dashed 1px;
+  /* text-decoration: underline; */
 }
 .sentence__highlight {
-  background-color: var(--gray7)
+  background-color: var(--gray7);
 }
 
 video {
@@ -534,11 +541,8 @@ button>image {
   padding-top: var(--grid);
   padding-bottom: var(--grid);
 
-  font-size: var(--body2-font-size);
-  font-family: var(--body2-font-family);
-  font-weight: var(--body2-font-weight);
-  line-height: var(--body2-line-height);
-  color: var(--gray100);
-
   background-color: var(--gray7);
+}
+.attachmenets__annotation__footer {
+  margin-top: var(--subgrid);
 }
