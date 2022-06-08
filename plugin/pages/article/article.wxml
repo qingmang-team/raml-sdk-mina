@@ -38,7 +38,7 @@
   </view>
 
   <view class="article__header__bottom">
-    <image wx:if="{{article.from}}" class="article__from" mode="heightFix" src="{{article.from.icon}}" />
+    <image wx:if="{{article.provider && article.provider.logotype}}" class="article__provider__logotype" mode="heightFix" src="{{article.provider.logotype}}" />
     <view wx:if="{{article.title}}" class="article__headline title-read">{{article.title}}</view>
     <view wx:if="{{article.intro}}" class="article__intro body1-read">{{article.intro}}</view>
 

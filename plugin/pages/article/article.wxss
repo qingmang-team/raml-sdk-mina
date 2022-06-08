@@ -131,6 +131,7 @@ page {
   font-weight: var(--body1-font-weight);
   line-height: var(--body1-line-height);
   color: var(--gray100);
+  word-wrap: break-word;
 }
 .body1-read {
   font-size: var(--body1-font-size);
@@ -292,7 +293,10 @@ page {
   display: flex;
   flex-direction: column;
 }
-
+.article__provider__logotype {
+  height: 50rpx;
+  width: 150rpx;
+}
 .article__footer {
   position: relative;
   display: flex;
