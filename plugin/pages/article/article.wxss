@@ -173,7 +173,7 @@ page {
   color: var(--secondary-color) !important;
 }
 .bold {
-  font-size: 600 !important;
+  font-weight: 600 !important;
   color: var(--base-color) !important;
 }
 

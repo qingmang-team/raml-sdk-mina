@@ -150,6 +150,7 @@ Page({
 
         let notes = res.data.notes
         if (notes && notes.length > 0) {
+          that.formateNotes(notes)
           let highlights = convertNotesToHighlights(notes)
           console.log("convert notes to highlights, ", notes, highlights);
           that.highlights = highlights
@@ -296,5 +297,39 @@ Page({
   },
   generateProvider: function (event) {
     return event.listsInfo[event.listsInfo.length - 1]
+  },
+  formateNotes: function (notes) {
+    for (let note of notes) {
+      note.date = this.getChineseRelativeTime(note.createdTime)
+      if (note.source == 2) note.reason = '先锋读者'
+      else if (note.source == 3) note.reason = '管理员'
+    }
+  },
+  getChineseRelativeTime: function(timestamp) {
+    const currentDate = new Date()
+    const current = currentDate.getTime()
+    const diff = current - timestamp
+  
+    if (diff <= 60 * 1000) {
+      return '刚刚'
+    } else if (diff <= 60 * 60 * 1000) {
+      return '' + Math.floor(diff / (60 * 1000)) + ' 分钟前'
+    } else if (diff <= 24 * 60 * 60 * 1000) {
+      return '' + Math.floor(diff / (60 * 60 * 1000)) + ' 小时前'
+    } else if (diff <= 7 * 24 * 60 * 60 * 1000) {
+      return '' + Math.floor(diff / (24 * 60 * 60 * 1000)) + ' 天前'
+    }
+  
+    const date = new Date(timestamp)
+    const day = date.getDate()
+    const month = date.getMonth() + 1
+    const year = date.getFullYear()
+  
+    if (year === currentDate.getFullYear()) {
+      // 同一年.
+      return '' + month + ' 月 ' + day + ' 日'
+    }
+  
+    return '' + year + ' 年 ' + month + ' 月 ' + day + ' 日'
   }
 })

@@ -14,8 +14,8 @@
     <view wx:if="{{highlight.annotationList && highlight.annotationList.length > 0}}" class="attachmenets-annotations">
       <block wx:for="{{highlight.annotationList}}" wx:for-item="note" wx:key="id">
         <view wx:if="{{note.annotation.text}}" class="attachmenets__annotation__text body2">
-          <text style="bold">{{note.user.name}} · </text><text>{{ note.annotation.text}}</text>
-          <view class="attachmenets__annotation__footer caption1">{{note.date}} · {{note.reason}}</view>
+          <text class="bold">{{note.user.name}} · </text><text selectable>{{note.annotation.text}}</text>
+          <view class="attachmenets__annotation__footer caption1">{{note.date}}<block wx:if="{{note.reason}}"> · {{note.reason}}</block></view>
         </view>
       </block>
     </view>
@@ -64,7 +64,8 @@
             <block wx:for="{{sentence.sentences}}" wx:for-item="word">
               <text class="{{word.class}} {{word.highlight ? 'sentence__highlight' : ''}}" 
                 data-word="{{word}}"
-                bindtap="openLink">{{word.text}}</text>
+                bindtap="openLink"
+                selectable>{{word.text}}</text>
             </block>
           </block>
           <view wx:if="{{index === content.length - 1}}" class="article-end body1"><text decode="{{true}}">&nbsp;</text><view class="article-end__icon" /></view>
