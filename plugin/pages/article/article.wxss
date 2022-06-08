@@ -472,15 +472,19 @@ page {
   margin-top: 0;
 }
 .sentence__bold {
-  font-weight: 500;
+  font-weight: 600;
   color: var(--base-color);
 }
 .sentence__em {
   font-style: italic;
 }
 .sentence__link {
-  border-bottom: #000 dashed 1px;
-  /* text-decoration: underline; */
+  font-weight: 600;
+  color: var(--base-color);
+
+  text-decoration: underline;
+  text-decoration-color: var(--gray100);
+  text-underline-offset: 4rpx;
 }
 .sentence__highlight {
   background-color: var(--gray7);
