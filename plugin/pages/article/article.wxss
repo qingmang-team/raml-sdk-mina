@@ -217,6 +217,18 @@ page {
   width: 48rpx;
   border-radius: 24rpx;
 }
+.navigation__container {
+  background: rgba(255, 255, 255, 0.8);
+  border: 0.5px solid rgba(151, 151, 151, 0.5);
+  border-radius: 18px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
 
 /**
  * Article Classes
@@ -225,7 +237,7 @@ page {
   display: flex;
   flex-direction: column;
   justify-content: space-between; 
-  height: 1460rpx;
+  height: 1600rpx;
   box-sizing: border-box;
 }
 .article__header__top {

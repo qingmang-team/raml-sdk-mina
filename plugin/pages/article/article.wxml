@@ -22,9 +22,14 @@
   </view>
 </template>
 
+<navigator class="navigation__container" open-type="navigateBack" 
+    style="left:{{navigation.left}}px;top:{{navigation.top}}px;height:{{navigation.height}}px;width:{{navigation.height}}px;">
+  <image src="/images/back.svg" style="width: 12px;height: 24px;" />
+</navigator>
+
 <!-- 文章标题 -->
 <view class="article__header" style="{{theme.style}}">
-  <view class="article__header__top">
+  <view class="article__header__top" style="margin-top:{{navigation.bottom + 10}}px">
     <template wx:if="{{article.markers && article.markers.length > 0}}" is="avatars" data="{{users: article.markers, name: article.markers[0].name, meta: ' 等在阅览室马克'}}"></template>
   </view>
 

@@ -69,6 +69,16 @@ Page({
   },
 
   initTheme: function() {
+    let menuBarRect = wx.getMenuButtonBoundingClientRect()
+    this.setData({
+      navigation: {
+        top: menuBarRect.top,
+        left: 10,
+        bottom: menuBarRect.bottom,
+        height: menuBarRect.height
+      }
+    })
+
     loadFont('qingmang-text-font', 'qingmang_text_light_v1.otf')
     loadFont('qingmang-display-font', 'qingmang_display_light_v1.otf')  
   },
