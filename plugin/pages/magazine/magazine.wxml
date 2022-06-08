@@ -1,0 +1,3 @@
+<navigator wx:for="{{articles}}" wx:for-item="article" class="action" url="plugin-private://wx13a6db3ed7ec76d1/pages/article/article?id={{article.id}}&list_id={{listId}}">
+  {{article.title}}
+</navigator>
