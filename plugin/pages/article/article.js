@@ -77,10 +77,11 @@ Page({
     // TODO 展示 loading
     var that = this;
     var payloads = {
-      token: 'MzE0ZmUxZGUtYzUwYi0xMWVjLWIyODMtMDAxNjNlMTBiYjdh',
+      // token: 'MzE0ZmUxZGUtYzUwYi0xMWVjLWIyODMtMDAxNjNlMTBiYjdh',
       doc_id: this.id,
       list_id: this.listId,
-      template: 'raml'
+      template: 'raml',
+      platform: 'wechat'
     }
     wx.request({
       url: `${apiDomain}/v2/pool.article.fetchEvent`,
