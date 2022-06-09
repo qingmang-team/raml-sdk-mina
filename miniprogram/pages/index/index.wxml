@@ -1,3 +1,12 @@
 <navigator wx:for="{{magazines}}" wx:for-item="magazine" class="action" url="plugin://read-plugin/magazine-page?list_id={{magazine.listId}}">
   {{magazine.name}}
 </navigator>
+
+<view style="background:#c2c2c2; width:100%; height: 1px; margin-top: 20px; margin-bottom: 20px; position: relative;" />
+
+<navigator class="action" url="plugin://read-plugin/article-page?id=-2132495101603821140&list_id=m1">
+  样文
+</navigator>
+<navigator class="action" url="plugin://read-plugin/article-page?id=2688851733755845116&list_id=m2">
+  文章笔记
+</navigator>
