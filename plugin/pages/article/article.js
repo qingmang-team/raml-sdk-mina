@@ -33,6 +33,12 @@ Page({
   onUnload: function () {
     this.stopTracking()
   },
+  onShareAppMessage: function () {
+    return {
+      title: '欢迎来到三顿半',
+      path: `plugin://read-plugin/article-page?id=${this.id}&list_id=${this.listId}`
+    }
+  },
   /**
    * 跳转链接
    */
@@ -69,6 +75,7 @@ Page({
   },
 
   initTheme: function() {
+    // 计算导航栏位置
     let menuBarRect = wx.getMenuButtonBoundingClientRect()
     this.setData({
       navigation: {
@@ -79,6 +86,12 @@ Page({
       }
     })
 
+    // 配置分享
+    wx.showShareMenu({
+      menus: ['shareAppMessage']
+    })
+
+    // 加载所需字体
     loadFont('qingmang-text-font', 'qingmang_text_light_v1.otf')
     loadFont('qingmang-display-font', 'qingmang-display-thin_v1.otf')  
   },
