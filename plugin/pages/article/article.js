@@ -2,6 +2,9 @@ import { loadFont, formatTime, decodeParam } from '../../utils/util.js';
 import { parseRAML, convertNotesToHighlights, attachAllHighlights } from '../../utils/raml.js';
 
 const apiDomain = 'https://api.readland.cn'
+const commonPayloads = {
+  platform: 'wechat'
+}
 const weekDays = ['一', '二', '三', '四', '五', '六', '日']
 const dynaimcIcons = {
   quote: '<?xml version="1.0" encoding="iso-8859-1"?><svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"	 viewBox="0 0 57 57" style="enable-background:new 0 0 57 57;" xml:space="preserve"><rect x="0" y="0" style="fill:none;" width="57" height="57"/><g>	<circle style="fill:#FFFFFF;" cx="18.5" cy="31.5" r="5.5"/>	<path style="fill:#FFFFFF;" d="M18.5,38c-3.584,0-6.5-2.916-6.5-6.5s2.916-6.5,6.5-6.5s6.5,2.916,6.5,6.5S22.084,38,18.5,38z		 M18.5,27c-2.481,0-4.5,2.019-4.5,4.5s2.019,4.5,4.5,4.5s4.5-2.019,4.5-4.5S20.981,27,18.5,27z"/></g><g>	<circle style="fill:#FFFFFF;" cx="35.5" cy="31.5" r="5.5"/>	<path style="fill:#FFFFFF;" d="M35.5,38c-3.584,0-6.5-2.916-6.5-6.5s2.916-6.5,6.5-6.5s6.5,2.916,6.5,6.5S39.084,38,35.5,38z		 M35.5,27c-2.481,0-4.5,2.019-4.5,4.5s2.019,4.5,4.5,4.5s4.5-2.019,4.5-4.5S37.981,27,35.5,27z"/></g><path style="fill:#FFFFFF;" d="M13,32c-0.553,0-1-0.447-1-1c0-7.72,6.28-14,14-14c0.553,0,1,0.447,1,1s-0.447,1-1,1	c-6.617,0-12,5.383-12,12C14,31.553,13.553,32,13,32z"/><path style="fill:#FFFFFF;" d="M30,32c-0.553,0-1-0.447-1-1c0-7.72,6.28-14,14-14c0.553,0,1,0.447,1,1s-0.447,1-1,1	c-6.617,0-12,5.383-12,12C31,31.553,30.553,32,30,32z"/></svg>'
@@ -32,6 +35,13 @@ Page({
   },
   onUnload: function () {
     this.stopTracking()
+  },
+  onShareAppMessage: function (res) {
+    this.logShareEvent(res.from)
+    return {
+      title: '欢迎来到三顿半',
+      path: `plugin://read-plugin/article-page?id=${this.id}&list_id=${this.listId}`
+    }
   },
   /**
    * 跳转链接
@@ -69,6 +79,7 @@ Page({
   },
 
   initTheme: function() {
+    // 计算导航栏位置
     let menuBarRect = wx.getMenuButtonBoundingClientRect()
     this.setData({
       navigation: {
@@ -79,6 +90,12 @@ Page({
       }
     })
 
+    // 配置分享
+    wx.showShareMenu({
+      menus: ['shareAppMessage']
+    })
+
+    // 加载所需字体
     loadFont('qingmang-text-font', 'qingmang_text_light_v1.otf')
     loadFont('qingmang-display-font', 'qingmang-display-thin_v1.otf')  
   },
@@ -91,7 +108,7 @@ Page({
       doc_id: this.id,
       list_id: this.listId,
       template: 'raml',
-      platform: 'wechat'
+      ...commonPayloads
     }
     wx.request({
       url: `${apiDomain}/v2/pool.article.fetchEvent`,
@@ -149,6 +166,7 @@ Page({
       doc_id: this.id,
       group: 'paragraph',
       max: 100,
+      ...commonPayloads
     }
     wx.request({
       url: `${apiDomain}/v2/note.groupInDoc`,
@@ -175,6 +193,7 @@ Page({
     var payloads = {
       doc_id: this.id,
       list_id: this.listId,
+      ...commonPayloads
     }
     wx.request({
       url: `${apiDomain}/v2/pool.article.relatedEvents`,
@@ -311,36 +330,42 @@ Page({
   },
   formateNotes: function (notes) {
     for (let note of notes) {
-      note.date = this.getChineseRelativeTime(note.createdTime)
+      note.date = formatTime(note.createdTime)
       if (note.source == 2) note.reason = '先锋读者'
       else if (note.source == 3) note.reason = '管理员'
     }
   },
-  getChineseRelativeTime: function(timestamp) {
-    const currentDate = new Date()
-    const current = currentDate.getTime()
-    const diff = current - timestamp
-  
-    if (diff <= 60 * 1000) {
-      return '刚刚'
-    } else if (diff <= 60 * 60 * 1000) {
-      return '' + Math.floor(diff / (60 * 1000)) + ' 分钟前'
-    } else if (diff <= 24 * 60 * 60 * 1000) {
-      return '' + Math.floor(diff / (60 * 60 * 1000)) + ' 小时前'
-    } else if (diff <= 7 * 24 * 60 * 60 * 1000) {
-      return '' + Math.floor(diff / (24 * 60 * 60 * 1000)) + ' 天前'
+  logShareEvent: function (from) {
+    this.logEvent('share', {
+      item_id: this.id,
+      item_type: 'article',
+      list_id: this.listId,
+      network: 'wechat',
+      content: from
+    })
+  },
+  logEvent: function (action, parameters) {
+    let event = {
+      event: action,
+      ...parameters
     }
-  
-    const date = new Date(timestamp)
-    const day = date.getDate()
-    const month = date.getMonth() + 1
-    const year = date.getFullYear()
-  
-    if (year === currentDate.getFullYear()) {
-      // 同一年.
-      return '' + month + ' 月 ' + day + ' 日'
-    }
-  
-    return '' + year + ' 年 ' + month + ' 月 ' + day + ' 日'
+    wx.request({
+      method: 'GET',
+      url: `https://api.qingmang.mobi/v1/log.send`,
+      data: {
+        product: 'magazine',
+        events: JSON.stringify([event]),
+        ...commonPayloads
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      fail: function (res) {
+        console.log("send log fail, ", res);
+      },
+      success: function (res) {
+        console.log("send log success, ", res);
+      }
+    })
   }
 })
