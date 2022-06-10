@@ -22,140 +22,143 @@
   </view>
 </template>
 
-<navigator class="navigation__container" open-type="navigateBack" 
-    style="left:{{navigation.left}}px;top:{{navigation.top}}px;height:{{navigation.height}}px;width:{{navigation.height}}px;">
-  <image src="/images/back.svg" style="width: 12px;height: 24px;" />
-</navigator>
-
-<view wx:if="{{!article}}" class="loading" style="top:{{navigation.bottom + 40}}px">
-  <i class="loading-icon"></i>
-  <view><text class="title-read"> </text><text class="body1-read"> </text></view>
+<view class="navigation__container" style="top:{{navigation.top}}px;height:{{navigation.height}}px;">
+  <image src="{{article && article.from && article.from.cover ? '/images/back-dark.svg' : '/images/back.svg'}}" class="navigation__container__action" catchtap="navigationBack" />
+  <image wx:if="{{article && article.from}}" src="{{article.from.cover ? article.from.iconDark : article.from.icon}}" mode="heightFix" class="navigation__container__logotype" />
 </view>
+<image class="article__cover" src="{{article.from.cover}}"></image>
 
-<!-- 文章标题 -->
-<view class="article__header" style="{{theme.style}}">
-  <view class="article__header__top" style="margin-top:{{navigation.bottom + 10}}px">
-    <template wx:if="{{article.markers && article.markers.length > 0}}" is="avatars" data="{{users: article.markers, name: article.markers[0].name, meta: ' 等在阅览室马克'}}"></template>
+<scroll-view scroll-y class="article__container" show-scrollbar="{{false}}" enable-back-to-top="{{true}}" style="top:{{navigation.coverHeight}}px;height:{{navigation.contentHeight}}px;">
+  <view wx:if="{{!article}}" class="loading" style="top:40px;">
+    <i class="loading-icon"></i>
+    <view><text class="title-read"> </text><text class="body1-read"> </text></view>
   </view>
 
-  <view class="article__header__bottom">
-    <block wx:if="{{article.provider}}">
-      <image wx:if="{{article.provider.logotype}}" class="article__provider__logotype" mode="heightFix" src="{{article.provider.logotype}}" />
-      <view wx:elif="{{article.provider.icon}}" style="display:flex; align-items:center;">
-        <image wx:if="{{article.provider.icon}}" class="article__provider__icon" src="{{article.provider.icon}}" />
-        <text class="subtitle2">{{article.provider.name}}</text>
-      </view>
-    </block>
-    
-    <view wx:if="{{article.title}}" class="article__headline title-read"><text>{{article.title}}</text></view>
-    <view wx:if="{{article.intro}}" class="article__intro body1-read">{{article.intro}}</view>
-
-    <!-- 其它信息 -->
-    <view class="article__byline">
-      <image wx:if="{{article.author && article.author.avatar}}" class="avatar__medium" style="margin-right: 10rpx;" mode="aspectFill" src="{{article.author.avatar}}" />
-      <view class="article__provider">
-        <view wx:if="{{article.author && article.author.names}}" class="subtitle4">{{article.author.names}}</view>
-        <view><text class="caption1">{{article.date}}</text></view>
-      </view>
+  <!-- 文章标题 -->
+  <view class="article__header" style="{{theme.style}} height:{{navigation.headerHeight}}px;">
+    <view class="article__header__top">
+      <template wx:if="{{article.markers && article.markers.length > 0}}" is="avatars" data="{{users: article.markers, name: article.markers[0].name, meta: ' 等在阅览室马克'}}"></template>
     </view>
-    <view class="divider" />
-  </view>
-</view>
 
-<!-- 文章详情 -->
-<view class="article" style="{{theme.style}}">
-  <!-- 正文，按段落来渲染 -->
-  <block wx:for="{{content}}" wx:for-item="paragraph" wx:key="id" wx:for-index="index">
-    <!-- 文本 -->
-    <view wx:if="{{paragraph.type == 0}}" class="{{paragraph.text.class}}">
-      <view style="display: flex; position: relative;">
-        <!-- <image wx:if="{{paragraph.blockquote === 1}}" class="paragraph__quote__icon" src="/images/quote.svg" /> -->
-        <view wx:if="{{paragraph.blockquote > 1}}" class="paragraph__quote__icon" style="background-image: url({{quoteIcon}})" />
-        <view wx:if="{{paragraph.li && paragraph.li.level > 0}}" style="display:inline;margin-right:10rpx;margin-left:{{(paragraph.li.level - 1) * 20}}rpx;">
-          <text wx:if="{{paragraph.li.type === 'ol'}}">•</text>
-          <text wx:elif="{{paragraph.li.type === 'ol' && paragraph.li.level > 1}}">◦</text>
-          <text wx:elif="{{paragraph.li.type === 'ul'}}">{{paragraph.li.order}}</text>
+    <view class="article__header__bottom">
+      <block wx:if="{{article.provider}}">
+        <image wx:if="{{article.provider.logotype}}" class="article__provider__logotype" mode="heightFix" src="{{article.provider.logotype}}" />
+        <view wx:elif="{{article.provider.icon}}" style="display:flex; align-items:center;">
+          <image wx:if="{{article.provider.icon}}" class="article__provider__icon" src="{{article.provider.icon}}" />
+          <text class="subtitle2">{{article.provider.name}}</text>
         </view>
-        <view style="display:inline; z-index: 1">
-          <block wx:for="{{paragraph.text.sentences}}" wx:for-item="sentence">
-            <block wx:for="{{sentence.sentences}}" wx:for-item="word">
-              <text class="{{word.class}} {{word.highlight ? 'sentence__highlight' : ''}}" 
-                data-word="{{word}}"
-                bindtap="openLink"
-                selectable>{{word.text}}</text>
-            </block>
-          </block>
-          <view wx:if="{{index === content.length - 1 && article.provider.icon}}" class="article-end body1"><text decode="{{true}}">&nbsp;</text><image class="icon__xs" src="{{article.provider.icon}}" /></view>
-        </view>
-      </view>
-      <template is="note-attachmenets" wx:if="{{paragraph.highlight}}" data="{{highlight: paragraph.highlight}}"></template>
-    </view>
-    <!-- 图片 -->
-    <view wx:elif="{{paragraph.type == 1}}" class="paragraph__image" id="{{paragraph.id}}" bindtap="onParagraphClicked">
-      <!-- 根据图片尺寸来做渲染 -->
-      <block wx:if="{{paragraph.image.width > 0}}">
-        <image wx:if="{{paragraph.decoration}}" src="{{paragraph.image.source}}"
-          mode="aspectFill" style="width: {{paragraph.image.width}}rpx; height: {{paragraph.image.height}}rpx;" />
-        <image wx:else src="{{paragraph.image.source}}"
-          mode="aspectFill" style="width: 654rpx; height: {{paragraph.image.height}}rpx;"/>
       </block>
-      <image wx:else src="{{paragraph.image.source}}"
-        style="width: 100%" mode="widthFix" />
+      
+      <view wx:if="{{article.title}}" class="article__headline title-read"><text>{{article.title}}</text></view>
+      <view wx:if="{{article.intro}}" class="article__intro body1-read">{{article.intro}}</view>
 
-      <!-- 如果图片有标题，展示 -->
-      <view wx:if="{{paragraph.image.title != undefined}}" class="paragraph__image-caption caption1">
-        {{paragraph.image.title}}
+      <!-- 其它信息 -->
+      <view class="article__byline">
+        <image wx:if="{{article.author && article.author.avatar}}" class="avatar__medium" style="margin-right: 10rpx;" mode="aspectFill" src="{{article.author.avatar}}" />
+        <view class="article__provider">
+          <view wx:if="{{article.author && article.author.names}}" class="subtitle4">{{article.author.names}}</view>
+          <view><text class="caption1">{{article.date}}</text></view>
+        </view>
       </view>
+      <view class="divider" />
+    </view>
+  </view>
 
-      <template is="note-attachmenets" wx:if="{{paragraph.highlight}}" data="{{highlight: paragraph.highlight}}"></template>
-    </view>
-    <!-- 视频 -->
-    <view wx:elif="{{paragraph.type == 2}}" class="paragraph__video">
-      <!-- 在小程序中，内嵌的视频播放会出现不少 bug，最好是点击后外部播放 -->
-      <video src="{{paragraph.media.source}}" poster="{{paragraph.media.cover}}"></video>
-    </view>
-    <!-- 音频 -->
-    <block wx:elif="{{paragraph.type == 3}}">
-      <view class="paragraph__audio">
-        <audio poster="{{paragraph.media.cover}}" name="{{paragraph.media.title}}"
-          src="{{paragraph.media.source}}" controls loop action="{method: 'play'}">
-        </audio>
+  <!-- 文章详情 -->
+  <view class="article" style="{{theme.style}}">
+    <!-- 正文，按段落来渲染 -->
+    <block wx:for="{{content}}" wx:for-item="paragraph" wx:key="id" wx:for-index="index">
+      <!-- 文本 -->
+      <view wx:if="{{paragraph.type == 0}}" class="{{paragraph.text.class}}">
+        <view style="display: flex; position: relative;">
+          <!-- <image wx:if="{{paragraph.blockquote === 1}}" class="paragraph__quote__icon" src="/images/quote.svg" /> -->
+          <view wx:if="{{paragraph.blockquote > 1}}" class="paragraph__quote__icon" style="background-image: url({{quoteIcon}})" />
+          <view wx:if="{{paragraph.li && paragraph.li.level > 0}}" style="display:inline;margin-right:10rpx;margin-left:{{(paragraph.li.level - 1) * 20}}rpx;">
+            <text wx:if="{{paragraph.li.type === 'ol'}}">•</text>
+            <text wx:elif="{{paragraph.li.type === 'ol' && paragraph.li.level > 1}}">◦</text>
+            <text wx:elif="{{paragraph.li.type === 'ul'}}">{{paragraph.li.order}}</text>
+          </view>
+          <view style="display:inline; z-index: 1">
+            <block wx:for="{{paragraph.text.sentences}}" wx:for-item="sentence">
+              <block wx:for="{{sentence.sentences}}" wx:for-item="word">
+                <text class="{{word.class}} {{word.highlight ? 'sentence__highlight' : ''}}" 
+                  data-word="{{word}}"
+                  bindtap="openLink"
+                  selectable>{{word.text}}</text>
+              </block>
+            </block>
+            <view wx:if="{{index === content.length - 1 && article.provider.icon}}" class="article-end body1"><text decode="{{true}}">&nbsp;</text><image class="icon__xs" src="{{article.provider.icon}}" /></view>
+          </view>
+        </view>
+        <template is="note-attachmenets" wx:if="{{paragraph.highlight}}" data="{{highlight: paragraph.highlight}}"></template>
       </view>
-    </block>
-    <!-- 表格 -->
-    <block wx:elif="{{paragraph.type == 4}}">
-    </block>
-    <!-- 图集 -->
-    <block wx:elif="{{paragraph.type == 5}}">
-    </block>
-    <!-- 占位符 -->
-    <block wx:elif="{{paragraph.type == 10}}">
-    </block>
-    <!-- 分割符 -->
-    <view wx:elif="{{paragraph.type == 11}}" class="paragraph__divider" />
-  </block>
-</view>
+      <!-- 图片 -->
+      <view wx:elif="{{paragraph.type == 1}}" class="paragraph__image" id="{{paragraph.id}}" bindtap="onParagraphClicked">
+        <!-- 根据图片尺寸来做渲染 -->
+        <block wx:if="{{paragraph.image.width > 0}}">
+          <image wx:if="{{paragraph.decoration}}" src="{{paragraph.image.source}}"
+            mode="aspectFill" style="width: {{paragraph.image.width}}rpx; height: {{paragraph.image.height}}rpx;" />
+          <image wx:else src="{{paragraph.image.source}}"
+            mode="aspectFill" style="width: 654rpx; height: {{paragraph.image.height}}rpx;"/>
+        </block>
+        <image wx:else src="{{paragraph.image.source}}"
+          style="width: 100%" mode="widthFix" />
 
-<view class="article__footer" wx:if="{{article}}" style="{{theme.style}}">
-  <view class="article__footer__background" />
-  <view class="article__footer__background-2" />
+        <!-- 如果图片有标题，展示 -->
+        <view wx:if="{{paragraph.image.title != undefined}}" class="paragraph__image-caption caption1">
+          {{paragraph.image.title}}
+        </view>
 
-  <view class="article-achievement__icon">
-    <image src="/images/check.svg" lazy-load="{{true}}" />
+        <template is="note-attachmenets" wx:if="{{paragraph.highlight}}" data="{{highlight: paragraph.highlight}}"></template>
+      </view>
+      <!-- 视频 -->
+      <view wx:elif="{{paragraph.type == 2}}" class="paragraph__video">
+        <!-- 在小程序中，内嵌的视频播放会出现不少 bug，最好是点击后外部播放 -->
+        <video src="{{paragraph.media.source}}" poster="{{paragraph.media.cover}}"></video>
+      </view>
+      <!-- 音频 -->
+      <block wx:elif="{{paragraph.type == 3}}">
+        <view class="paragraph__audio">
+          <audio poster="{{paragraph.media.cover}}" name="{{paragraph.media.title}}"
+            src="{{paragraph.media.source}}" controls loop action="{method: 'play'}">
+          </audio>
+        </view>
+      </block>
+      <!-- 表格 -->
+      <block wx:elif="{{paragraph.type == 4}}">
+      </block>
+      <!-- 图集 -->
+      <block wx:elif="{{paragraph.type == 5}}">
+      </block>
+      <!-- 占位符 -->
+      <block wx:elif="{{paragraph.type == 10}}">
+      </block>
+      <!-- 分割符 -->
+      <view wx:elif="{{paragraph.type == 11}}" class="paragraph__divider" />
+    </block>
   </view>
-  <view class="article-achievement__meta caption1">共 {{article.textLength}} 字，你读了 {{readMinutes}} 分钟</view>
-  <view class="article-achievement__meta caption1">共有 {{article.readCount}} 人读过 · 共阅读 {{article.readMinutes}} 分钟</view>
-  <view class="article-achievement__meta caption1">{{article.shareCount}} 人分享 · {{article.markCount}} 人马克</view>
-  <button class="article-achievement__action button1" open-type="share"><image src="/images/share.svg"/>分享</button>
 
-  <view wx:if="{{relativeArticles}}" class="article-relative section">
-    <image wx:if="{{article.from && article.from.icon}}" class="article__from" mode="heightFix" src="{{article.from.icon}}" />
-    <view class="section-header caption1">更多来自 {{article.from.name}}</view>
-    <navigator wx:for="{{relativeArticles.articles}}" wx:for-item="article" wx:key="id" 
-      class="article__compact card" hover-class="card__hover" url="plugin-private://wx13a6db3ed7ec76d1/pages/article/article?id={{article.id}}&list_id={{article.from.listId}}">
-      <view class="article__compact__icon button1">{{article.weekDay}}</view>
-      <view class="article__compact__headline subtitle2"><text>{{article.title}}</text></view>
-      <view class="article__compact__provider subtitle4">{{article.provider.name}}</view>
-    </navigator>
+  <view class="article__footer" wx:if="{{article}}" style="{{theme.style}}">
+    <view class="article__footer__background" />
+    <view class="article__footer__background-2" />
+
+    <view class="article-achievement__icon">
+      <image src="/images/check.svg" lazy-load="{{true}}" />
+    </view>
+    <view class="article-achievement__meta caption1">共 {{article.textLength}} 字，你读了 {{readMinutes}} 分钟</view>
+    <view class="article-achievement__meta caption1">共有 {{article.readCount}} 人读过 · 共阅读 {{article.readMinutes}} 分钟</view>
+    <view class="article-achievement__meta caption1">{{article.shareCount}} 人分享 · {{article.markCount}} 人马克</view>
+    <button class="article-achievement__action button1" open-type="share"><image src="/images/share.svg"/>分享</button>
+
+    <view wx:if="{{relativeArticles}}" class="article-relative section">
+      <image wx:if="{{article.from && article.from.icon}}" class="article__from" mode="heightFix" src="{{article.from.icon}}" />
+      <view class="section-header caption1">更多来自 {{article.from.name}}</view>
+      <navigator wx:for="{{relativeArticles.articles}}" wx:for-item="article" wx:key="id" 
+        class="article__compact card" hover-class="card__hover" url="plugin-private://wx13a6db3ed7ec76d1/pages/article/article?id={{article.id}}&list_id={{article.from.listId}}">
+        <view class="article__compact__icon button1">{{article.weekDay}}</view>
+        <view class="article__compact__headline subtitle2"><text>{{article.title}}</text></view>
+        <view class="article__compact__provider subtitle4">{{article.provider.name}}</view>
+      </navigator>
+    </view>
   </view>
-</view>
+</scroll-view>
