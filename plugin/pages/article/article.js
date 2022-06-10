@@ -44,6 +44,9 @@ Page({
       path: `plugin://read-plugin/article-page?id=${this.id}&list_id=${this.listId}`
     }
   },
+  navigationBack: function () {
+    wx.navigateBack({})
+  },
   /**
    * 跳转链接
    */
@@ -82,12 +85,19 @@ Page({
   initTheme: function() {
     // 计算导航栏位置
     let menuBarRect = wx.getMenuButtonBoundingClientRect()
+    let systemInfo = wx.getSystemInfoSync()
+    let totalWindowHeight = systemInfo.windowHeight
+    let coverHeight = 100
+    let contentHeight = totalWindowHeight - coverHeight
+    let contentHeaderHeight = 800 - coverHeight
     this.setData({
       navigation: {
         top: menuBarRect.top,
-        left: 10,
         bottom: menuBarRect.bottom,
-        height: menuBarRect.height
+        height: menuBarRect.height,
+        coverHeight: coverHeight,
+        contentHeight: contentHeight,
+        headerHeight: contentHeaderHeight
       }
     })
 
@@ -321,10 +331,8 @@ Page({
   generateFrom: function (event) {
     let listInfo = event.listsInfo.find(listInfo => listInfo.type === 'magazine')
     return {
-      listId: listInfo.listId,
-      name: listInfo.name,
-      icon: listInfo.icon || "http://statics04.qingmang.mobi/0fb54c6ede68.jpg",
-      color: listInfo.color ? `#${listInfo.color}` : '#E9D8B8'
+      ...listInfo,
+      color: listInfo.color ? `#${listInfo.color}` : '#000'
     }
   },
   generateProvider: function (event) {
