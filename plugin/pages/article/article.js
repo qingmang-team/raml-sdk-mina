@@ -39,13 +39,18 @@ Page({
   onShareAppMessage: function (res) {
     this.logShareEvent(res.from)
     return {
-      title: '欢迎来到三顿半',
+      title: this.data.article ? `${this.data.article.provider.name} · ${this.data.article.title}` : '分享文章',
       imageUrl: this.data.article.cover,
       path: `plugin://read-plugin/article-page?id=${this.id}&list_id=${this.listId}`
     }
   },
   navigationBack: function () {
-    wx.navigateBack({})
+    let pageCount = getCurrentPages().length
+    if (pageCount > 1) {
+      wx.navigateBack({})
+    } else {
+      wx.exitMiniProgram({})
+    }
   },
   /**
    * 跳转链接
@@ -144,6 +149,9 @@ Page({
           author = {}
           author.names = writers.map(writer => writer.name).join(' ')
           author.avatar = writers[0].avatar
+        }
+        if (!author && article.author) {
+          author.names = article.author
         }
 
         that.generateIcon('quote', from.color);
