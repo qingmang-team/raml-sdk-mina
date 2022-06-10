@@ -379,7 +379,6 @@ export const attachAllHighlights = function(paragraphs, highlights) {
   for (let i = 0; i < paragraphs.length; i++) {
     let paragraph = paragraphs[i]
     let paragraphHighlights = highlights[paragraph.id]
-    console.log('xxxx', paragraph.id, paragraphHighlights)
     // 如果是文字，highlight 具体的句子.
     if (paragraph.type === 0) {
       const view = buildTextParagraph(paragraph, highlights[paragraph.id])
