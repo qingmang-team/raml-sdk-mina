@@ -76,6 +76,7 @@ page {
   --gray100: rgba(0, 0, 0, 0.72);
   --gray40: rgba(0, 0, 0, 0.5);
   --gray7: #f2f2f2;
+  --seperator-color: rgba(0, 0, 0, 0.1);
 
   background-color: var(--canvas-color);
 }
@@ -431,6 +432,15 @@ page {
   margin-top: var(--grid2);
 }
 
+.paragraph__divider {
+  position: relative;
+  height: 1px;
+  width: var(--grid4);
+  background-color: var(--seperator-color);
+  margin-left: var(--margin);
+  margin-top: var(--grid2);
+}
+
 .paragraph__text {
   word-break: break-word;
   white-space: pre-wrap;
@@ -536,7 +546,7 @@ page {
   color: var(--base-color);
 
   text-decoration: underline;
-  text-decoration-color: rgba(0, 0, 0, 0.1);
+  text-decoration-color: var(--seperator-color);
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
 }
