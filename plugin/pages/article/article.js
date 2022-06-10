@@ -155,7 +155,9 @@ Page({
         if (writers.length > 0)  {
           author = {}
           author.names = writers.map(writer => writer.name).join(' ')
-          author.avatar = writers[0].avatar
+          if (writers[0].avatar !== 'http://statics04.qingmang.mobi/b33b994ed328.jpg') {
+            author.avatar = writers[0].avatar
+          }
         }
         if (!author && article.author) {
           author.names = article.author
