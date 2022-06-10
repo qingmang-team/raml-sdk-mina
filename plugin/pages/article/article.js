@@ -1,4 +1,4 @@
-import { loadFont, formatTime, decodeParam } from '../../utils/util.js';
+import { loadFont, formatTime, getFormatDateWithoutTime } from '../../utils/util.js';
 import { parseRAML, convertNotesToHighlights, attachAllHighlights } from '../../utils/raml.js';
 
 const apiDomain = 'https://api.readland.cn'
@@ -40,6 +40,7 @@ Page({
     this.logShareEvent(res.from)
     return {
       title: '欢迎来到三顿半',
+      imageUrl: this.data.article.cover,
       path: `plugin://read-plugin/article-page?id=${this.id}&list_id=${this.listId}`
     }
   },
@@ -125,7 +126,7 @@ Page({
         let provider = that.generateProvider(that.event)
 
         let article = that.event.article;
-        let articleDate = formatTime(article.publishDate);
+        let articleDate = getFormatDateWithoutTime(article.publishDate);
 
         let author = null
         let writers = article.writers || []
@@ -142,6 +143,7 @@ Page({
             title: article.title,
             intro: article.snippet,
             images: article.images,
+            cover: article.cover,
             author: author,
             from: from,
             provider: provider,
@@ -179,7 +181,7 @@ Page({
 
         let notes = res.data.notes
         if (notes && notes.length > 0) {
-          that.formateNotes(notes)
+          that.formatNotes(notes)
           let highlights = convertNotesToHighlights(notes)
           console.log("convert notes to highlights, ", notes, highlights);
           that.highlights = highlights
@@ -328,7 +330,7 @@ Page({
   generateProvider: function (event) {
     return event.listsInfo[event.listsInfo.length - 1]
   },
-  formateNotes: function (notes) {
+  formatNotes: function (notes) {
     for (let note of notes) {
       note.date = formatTime(note.createdTime)
       if (note.source == 2) note.reason = '先锋读者'

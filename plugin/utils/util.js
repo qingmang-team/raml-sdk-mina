@@ -31,9 +31,44 @@
   }
   if (year == currentDate.getFullYear()) {
     // 同一年.
-    return "" + month + "月" + day + "日";
+    return `${month} 月 ${day} 日`;
   }
-  return "" + year + "年" + month + "月" + day + "日";
+  return `${year} 年 ${month} 月 ${day} 日`;
+}
+
+/**
+ * 返回日期，不包含具体时间。
+ * - 近期，比如今天、昨天用相对时间
+ * - 同年，用月日
+ * - 其它，用年月日
+ * @param {Long} timestamp
+ */
+export const getFormatDateWithoutTime = (timestamp, isRelative = false) => {
+  const currentDate = new Date()
+  const yesterday = new Date(currentDate.getTime() - 24 * 60 * 60 * 1000)
+  const date = new Date(timestamp)
+  const day = date.getDate()
+  const month = date.getMonth() + 1
+  const year = date.getFullYear()
+  if (!isRelative) {
+    return `${year} 年 ${month} 月 ${day} 日`
+  } else if (isSameDate(currentDate, date)) {
+    return '今天'
+  } else if (isSameDate(yesterday, date)) {
+    return '昨天'
+  } else if (currentDate.getFullYear() !== year) {
+    return `${year} 年 ${month} 月 ${day} 日`
+  } else {
+    return `${month} 月 ${day} 日`
+  }
+}
+
+const isSameDate = (theDay, otherDay) => {
+  return (
+    theDay.getFullYear() === otherDay.getFullYear() &&
+    theDay.getMonth() === otherDay.getMonth() &&
+    theDay.getDate() === otherDay.getDate()
+  )
 }
 
 export function decodeParam(param) {

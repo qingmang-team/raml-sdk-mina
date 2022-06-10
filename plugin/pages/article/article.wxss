@@ -432,7 +432,7 @@ page {
 }
 
 .paragraph__text {
-  word-break: normal;
+  word-break: break-word;
   white-space: pre-wrap;
 }
 
@@ -536,8 +536,9 @@ page {
   color: var(--base-color);
 
   text-decoration: underline;
-  text-decoration-color: var(--gray100);
-  text-underline-offset: 4rpx;
+  text-decoration-color: rgba(0, 0, 0, 0.1);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
 }
 .sentence__highlight {
   background-color: var(--gray7);
