@@ -47,7 +47,7 @@
       </view>
     </block>
     
-    <view wx:if="{{article.title}}" class="article__headline title-read">{{article.title}}</view>
+    <view wx:if="{{article.title}}" class="article__headline title-read"><text>{{article.title}}</text></view>
     <view wx:if="{{article.intro}}" class="article__intro body1-read">{{article.intro}}</view>
 
     <!-- 其它信息 -->
@@ -132,8 +132,7 @@
     <block wx:elif="{{paragraph.type == 10}}">
     </block>
     <!-- 分割符 -->
-    <block wx:elif="{{paragraph.type == 11}}">
-    </block>
+    <view wx:elif="{{paragraph.type == 11}}" class="paragraph__divider" />
   </block>
 </view>
 
@@ -155,7 +154,7 @@
     <navigator wx:for="{{relativeArticles.articles}}" wx:for-item="article" wx:key="id" 
       class="article__compact card" hover-class="card__hover" url="plugin-private://wx13a6db3ed7ec76d1/pages/article/article?id={{article.id}}&list_id={{article.from.listId}}">
       <view class="article__compact__icon button1">{{article.weekDay}}</view>
-      <view class="article__compact__headline subtitle2">{{article.title}}</view>
+      <view class="article__compact__headline subtitle2"><text>{{article.title}}</text></view>
       <view class="article__compact__provider subtitle4">{{article.provider.name}}</view>
     </navigator>
   </view>
