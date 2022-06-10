@@ -49,7 +49,14 @@ Page({
     if (pageCount > 1) {
       wx.navigateBack({})
     } else {
-      wx.exitMiniProgram({})
+      let appId = wx.getAccountInfoSync().miniProgram.appId
+      let indexPath = '/pages/index/index'
+      if (appId === 'wx0d2c6fc1dcfe24e3' || appId === 'wxe53fc874ec95d052') {
+        indexPath = '/pages/main/index'
+      }
+      wx.redirectTo({
+        url: indexPath
+      })
     }
   },
   /**
