@@ -40,6 +40,7 @@ Page({
     this.logShareEvent(res.from)
     return {
       title: '欢迎来到三顿半',
+      imageUrl: this.data.article.cover,
       path: `plugin://read-plugin/article-page?id=${this.id}&list_id=${this.listId}`
     }
   },
@@ -142,6 +143,7 @@ Page({
             title: article.title,
             intro: article.snippet,
             images: article.images,
+            cover: article.cover,
             author: author,
             from: from,
             provider: provider,
