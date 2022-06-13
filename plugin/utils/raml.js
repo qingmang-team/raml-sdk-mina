@@ -311,7 +311,8 @@ const buildParagraph = (paragraph) => {
             text.class = 'paragraph__title subtitle3'
             break
           case 'pre':
-            text.class = 'paragraph__text style_pre'
+            // text.class = 'paragraph__text style_pre'
+            text.class = 'paragraph__quote quote1'
             break
           default:
             text.class = 'paragraph__text body1'

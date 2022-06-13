@@ -162,8 +162,9 @@ Page({
         if (!author && article.author) {
           author.names = article.author
         }
+        let color = (from && from.color) ? from.color : '#000000'
 
-        that.generateIcon('quote', from.color);
+        that.generateIcon('quote', color);
         that.setData({
           article: {
             id: that.id,
@@ -182,7 +183,7 @@ Page({
             readMinutes: Math.round(that.event.allUserReadSeconds / 60),
             markers: (that.event.markUsers || []).slice(0, 3)
           },
-          'theme.style': `--secondary-color:${from.color};`,
+          'theme.style': `--secondary-color:${color};`,
           readMinutes: 0
         });
         that.updateContent();
@@ -346,13 +347,18 @@ Page({
     })
   },
   generateFrom: function (event) {
-    let listInfo = event.listsInfo.find(listInfo => listInfo.type === 'magazine')
+    let listInfo = event.listsInfo.find(listInfo => listInfo.type === 'magazine' && listInfo.contentType === 'collection')
+    if (!listInfo) {
+      return null
+    }
     return {
       ...listInfo,
       color: listInfo.color ? `#${listInfo.color}` : '#000'
     }
   },
   generateProvider: function (event) {
+    let listInfo = event.listsInfo.find(listInfo => listInfo.type === 'publication' || listInfo.type === 'app_timeline')
+    if (listInfo) return listInfo
     return event.listsInfo[event.listsInfo.length - 1]
   },
   formatNotes: function (notes) {
