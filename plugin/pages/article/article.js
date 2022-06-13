@@ -1,4 +1,4 @@
-import { loadFont, formatTime, getFormatDateWithoutTime } from '../../utils/util.js';
+import { loadFont, formatTime, getFormatDateWithoutTime, combineCss } from '../../utils/util.js';
 import { parseRAML, convertNotesToHighlights, attachAllHighlights } from '../../utils/raml.js';
 
 const apiDomain = 'https://api.readland.cn'
@@ -162,7 +162,15 @@ Page({
         if (!author && article.author) {
           author.names = article.author
         }
+        // TODO 支持动态 theme
+        let themeStyle = {}
         let color = (from && from.color) ? from.color : '#000000'
+        themeStyle['--secondary-color'] = color
+        if (wx.getSystemInfoSync().platform === 'android') {
+          themeStyle['--font-weight-medium'] = 'bold'
+          themeStyle['--subtitle1-font-weight'] = 'bold'
+          themeStyle['--subtitle2-font-weight'] = 'bold'
+        }
 
         that.generateIcon('quote', color);
         that.setData({
@@ -183,7 +191,7 @@ Page({
             readMinutes: Math.round(that.event.allUserReadSeconds / 60),
             markers: (that.event.markUsers || []).slice(0, 3)
           },
-          'theme.style': `--secondary-color:${color};`,
+          'theme.style': combineCss(themeStyle),
           readMinutes: 0
         });
         that.updateContent();
