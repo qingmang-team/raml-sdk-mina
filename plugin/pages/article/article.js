@@ -160,7 +160,9 @@ Page({
           }
         }
         if (!author && article.author) {
-          author.names = article.author
+          author = {
+            names: article.author
+          }
         }
         let color = (from && from.color) ? from.color : '#000000'
 
