@@ -38,8 +38,12 @@ Page({
   },
   onShareAppMessage: function (res) {
     this.logShareEvent(res.from)
+    let title = this.data.article ? `${this.data.article.provider.name} · ${this.data.article.title.replace('\n', '')}` : '分享文章'
+    if (this.isSumatra()) {
+      title = this.data.article ? `邀请你阅读星球读本：${this.data.article.title.replace('\n', '')} ｜ ${this.data.article.provider.name}` : '邀请你阅读星球读本'
+    }
     return {
-      title: this.data.article ? `${this.data.article.provider.name} · ${this.data.article.title}` : '分享文章',
+      title: title,
       imageUrl: this.data.article.cover,
       path: `plugin://read-plugin/article-page?id=${this.id}&list_id=${this.listId}`
     }
@@ -49,15 +53,15 @@ Page({
     if (pageCount > 1) {
       wx.navigateBack({})
     } else {
-      let appId = wx.getAccountInfoSync().miniProgram.appId
-      let indexPath = '/pages/index/index'
-      if (appId === 'wx0d2c6fc1dcfe24e3' || appId === 'wxe53fc874ec95d052') {
-        indexPath = '/pages/main/index'
-      }
+      let indexPath = this.isSumatra() ? '/pages/main/index' : '/pages/index/index'
       wx.redirectTo({
         url: indexPath
       })
     }
+  },
+  isSumatra: function () {
+    let appId = wx.getAccountInfoSync().miniProgram.appId
+    return appId === 'wx0d2c6fc1dcfe24e3' || appId === 'wxe53fc874ec95d052' || appId === 'wx13a6db3ed7ec76d1'
   },
   /**
    * 跳转链接

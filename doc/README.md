@@ -7,13 +7,13 @@
 
 ## 配置
 
-在配置文件中进行声明，其中 version 发布后为具体的版本，目前最新的版本是 `1.0.0`。`read-plugin` 为一个自定义的名字，引用时使用。
-插件使用的更多配置细节可以参考文档： https://developers.weixin.qq.com/miniprogram/dev/framework/plugin/using.html
+在配置文件中进行声明，其中 version 发布后为具体的版本，最新版本可以在插件网站上查询 `https://mp.weixin.qq.com/wxopen/pluginbasicprofile?action=intro&appid=wx13a6db3ed7ec76d1`。`read-plugin` 为一个自定义的名字，引用时使用，为了分享成功，需要保持这个名字不能修改。
+插件使用的更多配置细节可以参考文档： `https://developers.weixin.qq.com/miniprogram/dev/framework/plugin/using.html`
 
 ```
 "plugins": {
     "read-plugin": {
-        "version": "1.0.0",
+        "version": "1.0.3",
         "provider": "wx13a6db3ed7ec76d1"
     }
 }
