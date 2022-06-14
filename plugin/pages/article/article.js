@@ -150,18 +150,28 @@ Page({
         let article = that.event.article;
         let articleDate = getFormatDateWithoutTime(article.publishDate);
 
-        let author = null
+        let authorNames = []
+        let authorAvatar = null
         let writers = article.writers || []
         if (writers.length > 0)  {
-          author = {}
-          author.names = writers.map(writer => writer.name).join(' ')
-          if (writers[0].avatar !== 'http://statics04.qingmang.mobi/b33b994ed328.jpg') {
-            author.avatar = writers[0].avatar
+          authorNames = writers.map(writer => writer.name)
+
+          let avatars = writers.filter(writer => {
+            return writer.avatar !== 'http://statics04.qingmang.mobi/b33b994ed328.jpg'
+          })
+          if (avatars.length > 0) {
+            authorAvatar = avatars[0].avatar
           }
+          console.log('avatar ', writers)
         }
-        if (!author && article.author) {
+        if (article.author) {
+          authorNames.push(article.author)
+        }
+        let author = null
+        if (authorNames.length > 0) {
           author = {
-            names: article.author
+            names: authorNames.join(' '),
+            avatar: authorAvatar
           }
         }
         let color = (from && from.color) ? from.color : '#000000'
