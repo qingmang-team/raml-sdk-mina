@@ -91,3 +91,35 @@ export const loadFont = async (fontFamily, filename = null) => {
     console.warn(`font ${fontFamily} loaded failed`, error)
   }
 }
+
+
+/**
+ * 将 dict 描述的样式，转义成一个字符串格式的样式.
+ * @param cssObject
+ * @returns {string}
+ * {
+ *   fontSize: '16px',
+ *   backgroundColor: '#aaaaaa'
+ * }
+ */
+ export function combineCss(cssObject) {
+  const arr = Object.entries(cssObject)
+    .map(([k, v]) => {
+      const key = camelToCase(k)
+      if (v || v === 0) {
+        return `${key}:${v}`
+      } else {
+        return null
+      }
+    })
+    .filter((item) => item)
+  if (arr.length) {
+    return arr.join(';') + ';'
+  } else {
+    return ''
+  }
+}
+
+const camelToCase = (string) => {
+  return string.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2').toLowerCase()
+}

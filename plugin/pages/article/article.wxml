@@ -28,14 +28,14 @@
 </view>
 <image class="article__cover" src="{{article.from.cover}}"></image>
 
-<scroll-view scroll-y class="article__container" show-scrollbar="{{false}}" enable-back-to-top="{{true}}" style="top:{{navigation.coverHeight}}px;height:{{navigation.contentHeight}}px;">
+<scroll-view scroll-y class="article__container" style="{{theme.style}}" show-scrollbar="{{false}}" enable-back-to-top="{{true}}" style="top:{{navigation.coverHeight}}px;height:{{navigation.contentHeight}}px;">
   <view wx:if="{{!article}}" class="loading" style="top:40px;">
     <i class="loading-icon"></i>
     <view><text class="title-read"> </text><text class="body1-read"> </text></view>
   </view>
 
   <!-- 文章标题 -->
-  <view class="article__header" style="{{theme.style}} height:{{navigation.headerHeight}}px;">
+  <view class="article__header" style="height:{{navigation.headerHeight}}px;">
     <view class="article__header__top">
       <template wx:if="{{article.markers && article.markers.length > 0}}" is="avatars" data="{{users: article.markers, name: article.markers[0].name, meta: ' 等在阅览室马克'}}"></template>
     </view>

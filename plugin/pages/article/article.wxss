@@ -14,60 +14,71 @@ page {
   --subgrid: 10rpx;
   --subgrid2: 20rpx;
 
+  --font-family-system: 'PingFang SC', 'SF Pro';
+  --font-family-qingmang-display: 'qingmang-display-font';
+  --font-family-qingmang-text: 'qingmang-text-font';
+
+  --font-weight-thin: 100;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-simi-bold: 600;
+  --font-weight-bold: 700;
+
   --title-font-size: 68rpx;
   --title-line-height: 80rpx;
-  --title-font-family: 'PingFang SC', 'SF Pro';
-  --title-font-weight: 500;
+  --title-font-family: var(--font-family-system);
+  --title-font-weight: var(--font-weight-medium);
   
   --headline-font-size: 56rpx;
   --headline-line-height: 70rpx;
-  --headline-font-family: 'PingFang SC', 'SF Pro';
-  --headline-font-weight: 500;
+  --headline-font-family: var(--font-family-system);
+  --headline-font-weight: var(--font-weight-medium);
 
   --subtitle1-font-size: 40rpx;
   --subtitle1-line-height: 60rpx;
-  --subtitle1-font-family: 'PingFang SC', 'SF Pro';
-  --subtitle1-font-weight: 500;
+  --subtitle1-font-family: var(--font-family-system);
+  --subtitle1-font-weight: var(--font-weight-medium);
 
   --subtitle2-font-size: 34rpx;
   --subtitle2-line-height: 50rpx;
-  --subtitle2-font-family: 'PingFang SC', 'SF Pro';
-  --subtitle2-font-weight: 500;
+  --subtitle2-font-family: var(--font-family-system);
+  --subtitle2-font-weight: var(--font-weight-medium);
   
   --subtitle4-font-size: 28rpx;
   --subtitle4-line-height: 40rpx;
-  --subtitle4-font-family: 'PingFang SC', 'SF Pro';
-  --subtitle4-font-weight: 510;
+  --subtitle4-font-family: var(--font-family-system);
+  --subtitle4-font-weight: var(--font-weight-medium);
 
   --body1-font-size: 34rpx;
   --body1-line-height: 60rpx;
-  --body1-font-family: 'PingFang SC', 'SF Pro';
-  --body1-font-weight: 400;
+  --body1-font-family: var(--font-family-system);
+  --body1-font-weight: var(--font-weight-normal);
   
   --body2-font-size: 30rpx;
   --body2-line-height: 40rpx;
-  --body2-font-family: 'PingFang SC', 'SF Pro';
-  --body2-font-weight: 400;
+  --body2-font-family: var(--font-family-system);
+  --body2-font-weight: var(--font-weight-normal);
 
   --quote1-font-size: 40rpx;
   --quote1-line-height: 50rpx;
-  --quote1-font-family: 'qingmang-text-font';
-  --quote1-font-weight: 300;
+  --quote1-font-family: var(--font-family-qingmang-text);
+  --quote1-font-weight: var(--font-weight-light);
 
   --quote2-font-size: 34rpx;
   --quote2-line-height: 40rpx;
-  --quote2-font-family: 'qingmang-text-font';
-  --quote2-font-weight: 300;
+  --quote2-font-family: var(--font-family-qingmang-text);
+  --quote2-font-weight: var(--font-weight-light);
   
   --caption1-font-size: 28rpx;
   --caption1-line-height: 40rpx;
-  --caption1-font-family: 'PingFang SC', 'SF Pro';
-  --caption1-font-weight: 400;
+  --caption1-font-family: var(--font-family-system);
+  --caption1-font-weight: var(--font-weight-normal);
 
   --button1-font-size: 34rpx;
   --button1-line-height: 50rpx;
-  --button1-font-family: 'PingFang SC', 'SF Pro';
-  --button1-font-weight: 500;
+  --button1-font-family: var(--font-family-system);
+  --button1-font-weight: var(--font-weight-medium);
 
   --base-color: #000;
   --canvas-color: #fff;
@@ -93,8 +104,8 @@ page {
 }
 .title-read {
   font-size: var(--title-font-size);
-  font-family: 'qingmang-display-font';
-  font-weight: 200;
+  font-family: var(--font-family-qingmang-display);
+  font-weight: var(--font-weight-thin);
   line-height: var(--title-line-height);
   color: var(--gray100);
 }
@@ -107,8 +118,8 @@ page {
 }
 .headline-read {
   font-size: var(--headline-font-size);
-  font-family: 'qingmang-display-font';
-  font-weight: 200;
+  font-family: var(--font-family-qingmang-display);
+  font-weight: var(--font-weight-thin);
   line-height: var(--headline-line-height);
   color: var(--gray100);
 }
@@ -186,7 +197,7 @@ page {
   color: var(--secondary-color) !important;
 }
 .bold {
-  font-weight: 600 !important;
+  font-weight: var(--font-weight-medium) !important;
   color: var(--base-color) !important;
 }
 
@@ -555,7 +566,7 @@ page {
   margin-top: 0;
 }
 .sentence__bold {
-  font-weight: 600;
+  font-weight: var(--font-weight-medium);
   color: var(--base-color);
 
   word-break: break-all;
@@ -565,7 +576,7 @@ page {
   font-style: italic;
 }
 .sentence__link {
-  font-weight: 600;
+  font-weight: var(--font-weight-medium);
   color: var(--base-color);
 
   text-decoration: underline;
