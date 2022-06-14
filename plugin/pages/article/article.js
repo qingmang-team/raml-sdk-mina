@@ -372,8 +372,8 @@ Page({
   formatNotes: function (notes) {
     for (let note of notes) {
       note.date = formatTime(note.createdTime)
-      if (note.source == 2) note.reason = '先锋读者'
-      else if (note.source == 3) note.reason = '管理员'
+      if (note.source == 2) note.reason = '精选'
+      else if (note.source == 3) note.reason = '先锋读者'
     }
   },
   logShareEvent: function (from) {
