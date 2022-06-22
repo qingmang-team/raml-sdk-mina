@@ -16,37 +16,37 @@ page {
 
   --title-font-size: 68rpx;
   --title-line-height: 80rpx;
-  --title-font-family: 'PingFang SC', 'SF Pro';
+  --title-font-family: inherit;
   --title-font-weight: 500;
   
   --headline-font-size: 56rpx;
   --headline-line-height: 70rpx;
-  --headline-font-family: 'PingFang SC', 'SF Pro';
+  --headline-font-family: inherit;
   --headline-font-weight: 500;
 
   --subtitle1-font-size: 40rpx;
   --subtitle1-line-height: 60rpx;
-  --subtitle1-font-family: 'PingFang SC', 'SF Pro';
+  --subtitle1-font-family: inherit;
   --subtitle1-font-weight: 500;
 
   --subtitle2-font-size: 34rpx;
   --subtitle2-line-height: 50rpx;
-  --subtitle2-font-family: 'PingFang SC', 'SF Pro';
+  --subtitle2-font-family: inherit;
   --subtitle2-font-weight: 500;
   
   --subtitle4-font-size: 28rpx;
   --subtitle4-line-height: 40rpx;
-  --subtitle4-font-family: 'PingFang SC', 'SF Pro';
+  --subtitle4-font-family: inherit;
   --subtitle4-font-weight: 510;
 
   --body1-font-size: 34rpx;
   --body1-line-height: 60rpx;
-  --body1-font-family: 'PingFang SC', 'SF Pro';
+  --body1-font-family: inherit;
   --body1-font-weight: 400;
   
   --body2-font-size: 30rpx;
   --body2-line-height: 40rpx;
-  --body2-font-family: 'PingFang SC', 'SF Pro';
+  --body2-font-family: inherit;
   --body2-font-weight: 400;
 
   --quote1-font-size: 40rpx;
@@ -61,12 +61,12 @@ page {
   
   --caption1-font-size: 28rpx;
   --caption1-line-height: 40rpx;
-  --caption1-font-family: 'PingFang SC', 'SF Pro';
+  --caption1-font-family: inherit;
   --caption1-font-weight: 400;
 
   --button1-font-size: 34rpx;
   --button1-line-height: 50rpx;
-  --button1-font-family: 'PingFang SC', 'SF Pro';
+  --button1-font-family: inherit;
   --button1-font-weight: 500;
 
   --base-color: #000;
@@ -325,8 +325,8 @@ page {
   width: 150rpx;
 }
 .article__provider__icon {
-  height: 40rpx;
-  width: 40rpx;
+  height: 50rpx;
+  width: 50rpx;
   margin-right: var(--subgrid);
 }
 .article__footer {
