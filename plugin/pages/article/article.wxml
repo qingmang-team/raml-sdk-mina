@@ -147,7 +147,7 @@
     </view>
     <view class="article-achievement__meta caption1">共 {{article.textLength}} 字，你读了 {{readMinutes}} 分钟</view>
     <view class="article-achievement__meta caption1">共有 {{article.readCount}} 人读过 · 共阅读 {{article.readMinutes}} 分钟</view>
-    <view class="article-achievement__meta caption1">{{article.shareCount}} 人分享 · {{article.markCount}} 人马克</view>
+    <view class="article-achievement__meta caption1">{{article.markCount}} 人马克</view>
     <button class="article-achievement__action button1" open-type="share"><image src="/images/share.svg"/>分享</button>
 
     <view wx:if="{{relativeArticles}}" class="article-relative section">
