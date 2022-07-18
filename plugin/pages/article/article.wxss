@@ -26,11 +26,13 @@ page {
 
   --subtitle1-font-size: 40rpx;
   --subtitle1-line-height: 60rpx;
+  --subtitle1-letter-spacing: 0;
   --subtitle1-font-family: inherit;
   --subtitle1-font-weight: 500;
 
-  --subtitle2-font-size: 34rpx;
-  --subtitle2-line-height: 50rpx;
+  --subtitle2-font-size: 32rpx;
+  --subtitle2-line-height: 60rpx;
+  --subtitle2-letter-spacing: 0;
   --subtitle2-font-family: inherit;
   --subtitle2-font-weight: 500;
   
@@ -39,8 +41,9 @@ page {
   --subtitle4-font-family: inherit;
   --subtitle4-font-weight: 510;
 
-  --body1-font-size: 34rpx;
+  --body1-font-size: 32rpx;
   --body1-line-height: 60rpx;
+  --body1-letter-spacing: 0;
   --body1-font-family: inherit;
   --body1-font-weight: 400;
   
@@ -54,15 +57,17 @@ page {
   --quote1-font-family: 'qingmang-text-font';
   --quote1-font-weight: 300;
 
-  --quote2-font-size: 34rpx;
-  --quote2-line-height: 40rpx;
-  --quote2-font-family: 'qingmang-text-font';
+  --quote2-font-size: 32rpx;
+  --quote2-line-height: 50rpx;
+  --quote2-letter-spacing: 0;
+  --quote2-font-family: inherit;
   --quote2-font-weight: 300;
   
-  --caption1-font-size: 28rpx;
+  --caption1-font-size: 24rpx;
   --caption1-line-height: 40rpx;
+  --caption1-letter-spacing: 0;
   --caption1-font-family: inherit;
-  --caption1-font-weight: 400;
+  --caption1-font-weight: 300;
 
   --button1-font-size: 34rpx;
   --button1-line-height: 50rpx;
