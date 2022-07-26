@@ -45,7 +45,7 @@ page {
   --body1-line-height: 60rpx;
   --body1-letter-spacing: 0;
   --body1-font-family: inherit;
-  --body1-font-weight: 400;
+  --body1-font-weight: 300;
   
   --body2-font-size: 30rpx;
   --body2-line-height: 40rpx;
@@ -127,6 +127,7 @@ page {
 .quote2 {
   font-size: var(--quote2-font-size);
   font-family: var(--quote2-font-family);
+  letter-spacing: var(--quote2-letter-spacing);
   font-weight: var(--quote2-font-weight);
   line-height: var(--quote2-line-height);
   color: var(--gray100);
@@ -134,6 +135,7 @@ page {
 .body1 {
   font-size: var(--body1-font-size);
   font-family: var(--body1-font-family);
+  letter-spacing: var(--body1-letter-spacing);
   font-weight: var(--body1-font-weight);
   line-height: var(--body1-line-height);
   color: var(--gray100);
@@ -155,6 +157,7 @@ page {
 .caption1 {
   font-size: var(--caption1-font-size);
   font-family: var(--caption1-font-family);
+  letter-spacing: var(--caption1-letter-spacing);
   font-weight: var(--caption1-font-weight);
   line-height: var(--caption1-line-height);
   color: var(--gray40);
@@ -162,6 +165,7 @@ page {
 .subtitle1 {
   font-size: var(--subtitle1-font-size);
   font-family: var(--subtitle1-font-family);
+  letter-spacing: var(--subtitle1-letter-spacing);
   font-weight: var(--subtitle1-font-weight);
   line-height: var(--subtitle1-line-height);
   color: var(--base-color);
@@ -169,6 +173,7 @@ page {
 .subtitle2 {
   font-size: var(--subtitle2-font-size);
   font-family: var(--subtitle2-font-family);
+  letter-spacing: var(--subtitle2-letter-spacing);
   font-weight: var(--subtitle2-font-weight);
   line-height: var(--subtitle2-line-height);
   color: var(--base-color);
@@ -393,6 +398,7 @@ page {
   margin-bottom: var(--grid);
   background-color: var(--secondary-color) !important;
   color: var(--on-secondary-color) !important;
+  width: auto !important;
 }
 .article-relative {
   display: flex;
