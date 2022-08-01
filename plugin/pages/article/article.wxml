@@ -8,16 +8,18 @@
 <template name="note-attachmenets">
   <view class="attachmenets">
     <!-- header -->
-    <template is="avatars" data="{{users: highlight.users, meta: (highlight.number > 1 ? (highlight.number + ' 人') : '') + '马克了' }}"></template>
+    <template is="avatars" data="{{users: highlight.users, meta: (highlight.users.length > 0 ? (highlight.users[0].name + (highlight.number > 1 ? ' 等 ' + highlight.number + ' 人' : ' ')) : highlight.number + '人') + '马克了' }}"></template>
 
     <!-- notes -->
     <view wx:if="{{highlight.annotationList && highlight.annotationList.length > 0}}" class="attachmenets-annotations">
-      <block wx:for="{{highlight.annotationList}}" wx:for-item="note" wx:key="id">
-        <view wx:if="{{note.annotation.text}}" class="attachmenets__annotation__text body2">
-          <text class="bold">{{note.user.name}} · </text><text selectable>{{note.annotation.text}}</text>
-          <view class="attachmenets__annotation__footer caption1">{{note.date}}<block wx:if="{{note.reason}}"> · {{note.reason}}</block></view>
+      <view wx:for="{{highlight.annotationList}}" wx:for-item="note" wx:key="id" class="attachmenets__annotation">
+        <image class="avatars__icon avatar__small" src="{{note.user.avatar}}" />
+        <view wx:if="{{note.annotation.text}}" class="attachmenets__annotation__body">
+          <view style="display: flex"><text class="subtitle4">{{note.user.name}}</text><text wx:if="{{note.user.desc}}" class="caption1"> · {{note.user.desc}}</text></view>
+          <view class="attachmenets__annotation__text body2" selectable>{{note.annotation.text}}</view>
+          <!-- <view class="attachmenets__annotation__footer caption1">{{note.date}}<block wx:if="{{note.reason}}"> · {{note.reason}}</block></view> -->
         </view>
-      </block>
+      </view>
     </view>
   </view>
 </template>
@@ -71,12 +73,11 @@
       <!-- 文本 -->
       <view wx:if="{{paragraph.type == 0}}" class="{{paragraph.text.class}}">
         <view style="display: flex; position: relative;">
-          <!-- <image wx:if="{{paragraph.blockquote === 1}}" class="paragraph__quote__icon" src="/images/quote.svg" /> -->
           <view wx:if="{{paragraph.blockquote > 1 || paragraph.text.linetype === 'pre'}}" class="paragraph__quote__icon" style="background-image: url({{quoteIcon}})" />
-          <view wx:if="{{paragraph.li && paragraph.li.level > 0}}" style="display:inline;margin-right:10rpx;margin-left:{{(paragraph.li.level - 1) * 20}}rpx;">
-            <text wx:if="{{paragraph.li.type === 'ol'}}">•</text>
-            <text wx:elif="{{paragraph.li.type === 'ol' && paragraph.li.level > 1}}">◦</text>
-            <text wx:elif="{{paragraph.li.type === 'ul'}}">{{paragraph.li.order}}</text>
+          <view wx:elif="{{paragraph.blockquote === 1}}" class="paragraph__blockquote__line"></view>
+          <view wx:elif="{{paragraph.li && paragraph.li.level > 0}}" class="paragraph__list__bullet" style="margin-left:{{(paragraph.li.level - 1) * 60 + 10}}rpx;">
+            <text wx:if="{{paragraph.li.type === 'ul'}}">·</text>
+            <text wx:elif="{{paragraph.li.type === 'ol'}}">{{paragraph.li.order}}.</text>
           </view>
           <view style="display:inline; z-index: 1">
             <block wx:for="{{paragraph.text.sentences}}" wx:for-item="sentence">

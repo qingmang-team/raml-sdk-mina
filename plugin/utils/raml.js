@@ -115,7 +115,7 @@ const buildTextDomTree = function(paragraph, sentences, words) {
     class: null,
   }
   if (paragraph.blockquote >= 1) {
-    view.class = paragraph.blockquote === 1 ? 'paragraph__blockquote quote2' : 'paragraph__quote quote1'
+    view.class = paragraph.blockquote === 1 ? 'paragraph__blockquote quote2' : 'paragraph__quote title-read'
   } else if (text.linetype === 'aside') {
     view.class = 'paragraph__aside body1'
   } else {
@@ -295,7 +295,7 @@ const buildParagraph = (paragraph) => {
       const text = paragraph.text
       // blockquote 的样式
       if (paragraph.blockquote >= 1) {
-        text.class = paragraph.blockquote === 1 ? 'paragraph__blockquote quote2' : 'paragraph__quote quote1'
+        text.class = paragraph.blockquote === 1 ? 'paragraph__blockquote quote2' : 'paragraph__quote title-read'
       } else {
         switch (text.linetype) {
           case 'aside':
@@ -312,7 +312,7 @@ const buildParagraph = (paragraph) => {
             break
           case 'pre':
             // text.class = 'paragraph__text style_pre'
-            text.class = 'paragraph__quote quote1'
+            text.class = 'paragraph__quote title-read'
             break
           default:
             text.class = 'paragraph__text body1'
@@ -406,6 +406,15 @@ export const attachAllHighlights = function(paragraphs, highlights) {
             // 只在最后一段显示 annotation
             continue
           }
+          // 计算该段出现的评论信息.
+          if (
+            note.annotation &&
+            (note.annotation.text || note.annotation.images.length)
+          ) {
+            console.log("annotation", note.annotation)
+            annotationList.push(note)
+            continue  // 如果有评论信息，不显示用户信息
+          }
           // 计算该段 mark 的用户信息
           if (users.length < 3) {
             let existed = false
@@ -417,14 +426,6 @@ export const attachAllHighlights = function(paragraphs, highlights) {
             if (!existed) {
               users.push(note.user)
             }
-          }
-          // 计算该段出现的评论信息.
-          if (
-            note.annotation &&
-            (note.annotation.text || note.annotation.images.length)
-          ) {
-            console.log("annotation", note.annotation)
-            annotationList.push(note)
           }
         }
       }
