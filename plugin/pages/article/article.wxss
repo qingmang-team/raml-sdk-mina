@@ -233,6 +233,9 @@ page {
 .card__hover {
   background-color: var(--gray7);
 }
+.card__part {
+  margin-top: var(--grid);
+}
 .avatar__medium {
   width: 80rpx;
   height: 80rpx;
@@ -437,6 +440,13 @@ page {
   margin-top: var(--subgrid);
   text-align: center;
   color: var(--secondary-color);
+}
+.article__provider__card {
+  margin-left: var(--margin);
+  margin-right: var(--margin);
+  padding: var(--grid2);
+  width: auto !important;
+  background-color: var(--canvas-color);
 }
 
 /**

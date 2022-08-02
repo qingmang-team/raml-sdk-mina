@@ -150,6 +150,17 @@
     <view class="article-achievement__meta caption1">共有 {{article.readCount}} 人读过 · 共阅读 {{article.readMinutes}} 分钟</view>
     <view class="article-achievement__meta caption1">{{article.markCount}} 人马克</view>
     <button class="article-achievement__action button1" open-type="share"><image src="/images/share.svg"/>分享</button>
+    
+    <view wx:if="{{article.provider}}" class="article__provider__card section">
+      <image wx:if="{{article.provider.logotype}}" class="article__provider__logotype" mode="heightFix" src="{{article.provider.logotype}}" />
+      <view wx:elif="{{article.provider.icon}}" style="display:flex; align-items:center;">
+        <image wx:if="{{article.provider.icon}}" class="article__provider__icon" src="{{article.provider.icon}}" />
+        <text class="subtitle2">{{article.provider.name}}</text>
+      </view>
+      <view wx:if="{{article.provider.description}}" class="card__part body2">{{article.provider.description}}</view>
+      <view class="card__part caption1">本账号内容采用「署名 4.0 国际（CC BY 4.0）」授权，具体详细信息，可参考以下链接。作者仅保留署名权，放弃其它一切权利。本媒体文章、内容、图片可以自由转发至朋友圈、微信群、邮件、网站等任何媒介，无需事先征得同意。商业用途也在免费许可之内。欢迎随意转载，使用所有内容。
+此处供填写整个媒体的版权、法务政策</view>
+    </view>
 
     <view wx:if="{{relativeArticles}}" class="article-relative section">
       <image wx:if="{{article.from && article.from.icon}}" class="article__from" mode="heightFix" src="{{article.from.icon}}" />
